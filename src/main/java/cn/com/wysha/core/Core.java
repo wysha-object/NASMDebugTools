@@ -389,8 +389,6 @@ public class Core {
     }
 
     private void setFLAG(int a, int b, int v, int rs, int size) {
-        String as = Integer.toString(a, 2);
-        String bs = Integer.toString(b, 2);
         int rsAF=(a&0xF)+(b&0xF);
         AF = Integer.toString(rsAF, 2).length() > 4;
         String s = Integer.toString(v, 2);
@@ -420,7 +418,12 @@ public class Core {
     public int stringToMemIndex(String string) {
         String s = string.replace("[", "");
         s = s.replace("]", "");
-        return stringToWord(s);
+        String[] strings=s.split(":");
+        if (strings.length==1){
+            return (getDS()<<4)+stringToWord(s);
+        }else {
+            return (stringToWord(strings[0])<<4)+stringToWord(strings[1]);
+        }
     }
 
     private short stringToByte(String string) {
