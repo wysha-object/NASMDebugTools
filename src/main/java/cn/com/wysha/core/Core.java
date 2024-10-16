@@ -391,7 +391,8 @@ public class Core {
     private void setFLAG(int a, int b, int v, int rs, int size) {
         String as = Integer.toString(a, 2);
         String bs = Integer.toString(b, 2);
-        AF = as.length() == 4 && bs.length() == 4;
+        int rsAF=(a&0xF)+(b&0xF);
+        AF = Integer.toString(rsAF, 2).length() > 4;
         String s = Integer.toString(v, 2);
         CF = s.length() > size;
         PF = countCharacter(s, '1') % 2 == 0;

@@ -7,6 +7,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class MainGUI extends JFrame {
     private JPanel contentPane;
@@ -47,8 +51,10 @@ public class MainGUI extends JFrame {
             for (String line : lines) {
                 if (core.run(line.toUpperCase())){
                     dataArrayList.add(line);
+                    refresh();
                 }
             }
+            scrollBar.setValue(scrollBar.getMaximum());
         });
 
         tableRefreshButton.addActionListener(_ -> {
@@ -67,11 +73,12 @@ public class MainGUI extends JFrame {
             table.setModel(tableModel);
         });
 
-        new Thread(() -> {
-            while (true){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
                 refresh();
             }
-        }).start();
+        },100,100);
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 17; j++) {
@@ -117,6 +124,9 @@ public class MainGUI extends JFrame {
         }
         indexList.setListData(integers);
         dataList.setListData(dataArrayList.toArray(new String[0]));
+
+        repaint();
+        revalidate();
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
