@@ -919,9 +919,11 @@ public class Core extends LabelList {
             }
         } catch (Exception e) {
             MainGUI.mainGUI.addData(e.getMessage());
+            MainGUI.mainGUI.refresh();
             System.out.println(e.getMessage());
             return false;
         }
+        MainGUI.mainGUI.refresh();
         return true;
     }
 
@@ -1102,9 +1104,9 @@ public class Core extends LabelList {
     }
 
 
-    private byte andByte(short a, short b) {
+    private short andByte(short a, short b) {
         int v = a & b;
-        byte rs = (byte) (v & 0xFF);
+        short rs = (short) (v & 0xFF);
         and_or_xorSetFLAG(v, rs, 8);
         return rs;
     }
@@ -1116,9 +1118,9 @@ public class Core extends LabelList {
         return rs;
     }
 
-    private byte orByte(short a, short b) {
+    private short orByte(short a, short b) {
         int v = a | b;
-        byte rs = (byte) (v & 0xFF);
+        short rs = (short) (v & 0xFF);
         and_or_xorSetFLAG(v, rs, 8);
         return rs;
     }
@@ -1130,9 +1132,9 @@ public class Core extends LabelList {
         return rs;
     }
 
-    private byte xorByte(short a, short b) {
+    private short xorByte(short a, short b) {
         int v = a ^ b;
-        byte rs = (byte) (v & 0xFF);
+        short rs = (short) (v & 0xFF);
         and_or_xorSetFLAG(v, rs, 8);
         return rs;
     }
