@@ -6,8 +6,7 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        MainGUI mainGUI=new MainGUI();
-        mainGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainGUI.setVisible(true);
+        MainGUI.mainGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MainGUI.mainGUI.setVisible(true);
     }
 }

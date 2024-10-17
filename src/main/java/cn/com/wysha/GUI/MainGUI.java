@@ -1,18 +1,20 @@
 package cn.com.wysha.GUI;
 
+import cn.com.wysha.core.CmdList;
 import cn.com.wysha.core.Core;
+import cn.com.wysha.core.EndMode;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+
+import static cn.com.wysha.core.Core.core;
 
 public class MainGUI extends JFrame {
+    public static final MainGUI mainGUI=new MainGUI();
+
     private JPanel contentPane;
     private JList<String> infoList;
     private JList<String> dataList;
@@ -26,47 +28,45 @@ public class MainGUI extends JFrame {
     private JTextField startIndex;
     private JButton tableRefreshButton;
     private JPanel header;
+    private JButton editGlobalLabelButton;
+    private JButton editAllCmdListButton;
+
     private final ArrayList<String> dataArrayList=new ArrayList<>();
-    private final Core core;
+
+    public void addData(String data){
+        dataArrayList.add(data);
+        refresh();
+        revalidate();
+        scrollBar.setValue(scrollBar.getMaximum());
+    }
+
     private final String[] columnNames={"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"};
     private final String[][] dataTable=new String[16][17];
 
     int start=0;
-
-    public MainGUI() {
+    private MainGUI() {
         setContentPane(contentPane);
         Dimension dimension=Toolkit.getDefaultToolkit().getScreenSize();
         setSize(dimension.width/2,dimension.height/2);
         setLocationRelativeTo(null);
 
-        GetValue getValue=new GetValue();
-        getValue.setVisible(true);
-        core=new Core(getValue.value);
+        GetValueGUI getValueGUI =new GetValueGUI();
+        getValueGUI.setVisible(true);
+        new Core(getValueGUI.value);
 
         header.add(table.getTableHeader());
         startIndex.setText("0");
 
-        OKButton.addActionListener(_ -> {
-            String[] lines = textArea.getText().split("\\r?\\n");
-            for (String line : lines) {
-                if (core.run(line.toUpperCase())){
-                    dataArrayList.add(line);
-                    refresh();
-                }
-            }
-            scrollBar.setValue(scrollBar.getMaximum());
-        });
+        OKButton.addActionListener(_ -> new CmdList(core, "Main", textArea.getText(), EndMode.STOP, "").runCmdList());
 
         tableRefreshButton.addActionListener(_ -> {
             start=Integer.valueOf(startIndex.getText(),16);
+            refresh();
         });
 
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                refresh();
-            }
-        },100,100);
+        editAllCmdListButton.addActionListener(_ -> new AllCmdListGUI().setVisible(true));
+
+        editGlobalLabelButton.addActionListener(_ -> new EditLabelListGUI(core).setVisible(true));
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 17; j++) {
@@ -80,6 +80,7 @@ public class MainGUI extends JFrame {
 
         TableModel tableModel=new DefaultTableModel(dataTable,columnNames);
         table.setModel(tableModel);
+        refresh();
     }
     public void refresh(){
         String[] infoData=new String[21];
@@ -125,9 +126,6 @@ public class MainGUI extends JFrame {
 
         TableModel tableModel=new DefaultTableModel(dataTable,columnNames);
         table.setModel(tableModel);
-
-        repaint();
-        revalidate();
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

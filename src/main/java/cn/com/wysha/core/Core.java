@@ -1,77 +1,108 @@
 package cn.com.wysha.core;
 
-public class Core {
-    RegisterByte ah = new RegisterByte();
-    RegisterByte al = new RegisterByte();
-    RegisterByte bh = new RegisterByte();
-    RegisterByte bl = new RegisterByte();
-    RegisterByte ch = new RegisterByte();
-    RegisterByte cl = new RegisterByte();
-    RegisterByte dh = new RegisterByte();
-    RegisterByte dl = new RegisterByte();
+import cn.com.wysha.GUI.MainGUI;
+import cn.com.wysha.tool.Tool;
+
+import java.math.BigInteger;
+import java.util.HashSet;
+
+public class Core extends LabelList {
+    private final HashSet<CmdList> cmdListArrayList = new HashSet<>();
+    public static Core core;
+
+    public CmdList[] allCmdList() {
+        return cmdListArrayList.toArray(new CmdList[0]);
+    }
+
+    public void addCmdList(CmdList cmdList) {
+        cmdListArrayList.add(cmdList);
+    }
+
+    public void removeCmdList(CmdList cmdList) {
+        cmdListArrayList.remove(cmdList);
+    }
+
+    public CmdList findCmdList(String cmdListName) {
+        for (CmdList cmdList : cmdListArrayList) {
+            if (cmdList.getName().equals(cmdListName)) {
+                return cmdList;
+            }
+        }
+        return null;
+    }
+
+
+    Register ah = new Register();
+    Register al = new Register();
+    Register bh = new Register();
+    Register bl = new Register();
+    Register ch = new Register();
+    Register cl = new Register();
+    Register dh = new Register();
+    Register dl = new Register();
 
     public short getAH() {
-        return ah.get();
+        return ah.get().shortValue();
     }
 
     public short getAL() {
-        return al.get();
+        return al.get().shortValue();
     }
 
     public short getBH() {
-        return bh.get();
+        return bh.get().shortValue();
     }
 
     public short getBL() {
-        return bl.get();
+        return bl.get().shortValue();
     }
 
     public short getCH() {
-        return ch.get();
+        return ch.get().shortValue();
     }
 
     public short getCL() {
-        return cl.get();
+        return cl.get().shortValue();
     }
 
     public short getDH() {
-        return dh.get();
+        return dh.get().shortValue();
     }
 
     public short getDL() {
-        return dl.get();
+        return dl.get().shortValue();
     }
 
     public void setAH(short value) {
-        ah.set((short) (value >> 8));
+        ah.set(BigInteger.valueOf(value));
     }
 
     public void setAL(short value) {
-        al.set((short) (value & 0xff));
+        al.set(BigInteger.valueOf(value));
     }
 
     public void setBH(short value) {
-        bh.set((short) (value >> 8));
+        bh.set(BigInteger.valueOf(value));
     }
 
     public void setBL(short value) {
-        bl.set((short) (value & 0xff));
+        bl.set(BigInteger.valueOf(value));
     }
 
     public void setCH(short value) {
-        ch.set((short) (value >> 8));
+        ch.set(BigInteger.valueOf(value));
     }
 
     public void setCL(short value) {
-        cl.set((short) (value & 0xff));
+        cl.set(BigInteger.valueOf(value));
     }
 
     public void setDH(short value) {
-        dh.set((short) (value >> 8));
+        dh.set(BigInteger.valueOf(value));
     }
 
     public void setDL(short value) {
-        dl.set((short) (value & 0xff));
+        dl.set(BigInteger.valueOf(value));
     }
 
     public int hlToWord(short highByte, short lowByte) {
@@ -79,24 +110,24 @@ public class Core {
     }
 
     public int getAX() {
-        return hlToWord(ah.get(), al.get());
+        return hlToWord(getAH(), getAL());
     }
 
     public int getBX() {
-        return hlToWord(bh.get(), bl.get());
+        return hlToWord(getBH(), getBL());
     }
 
     public int getCX() {
-        return hlToWord(ch.get(), cl.get());
+        return hlToWord(getCH(), getCL());
     }
 
     public int getDX() {
-        return hlToWord(dh.get(), dl.get());
+        return hlToWord(getDH(), getDL());
     }
 
-    private void setHL(RegisterByte h, RegisterByte l, int value) {
-        h.set((short) (value >>> 8));
-        l.set((short) (value & 0xff));
+    private void setHL(Register h, Register l, int value) {
+        h.set(BigInteger.valueOf((value >>> 8) & 0xff));
+        l.set(BigInteger.valueOf(value & 0xff));
     }
 
     private void setAX(int value) {
@@ -115,78 +146,78 @@ public class Core {
         setHL(dh, dl, value);
     }
 
-    RegisterWord si = new RegisterWord();
-    RegisterWord di = new RegisterWord();
-    RegisterWord bp = new RegisterWord();
-    RegisterWord sp = new RegisterWord();
+    Register si = new Register();
+    Register di = new Register();
+    Register bp = new Register();
+    Register sp = new Register();
 
-    RegisterWord cs = new RegisterWord();
-    RegisterWord ds = new RegisterWord();
-    RegisterWord es = new RegisterWord();
-    RegisterWord ss = new RegisterWord();
+    Register cs = new Register();
+    Register ds = new Register();
+    Register es = new Register();
+    Register ss = new Register();
 
     public int getSI() {
-        return si.get();
+        return si.get().intValue();
     }
 
     public int getDI() {
-        return di.get();
+        return di.get().intValue();
     }
 
     public int getBP() {
-        return bp.get();
+        return bp.get().intValue();
     }
 
     public int getSP() {
-        return sp.get();
+        return sp.get().intValue();
     }
 
     public int getCS() {
-        return cs.get();
+        return cs.get().intValue();
     }
 
     public int getDS() {
-        return ds.get();
+        return ds.get().intValue();
     }
 
     public int getES() {
-        return es.get();
+        return es.get().intValue();
     }
 
     public int getSS() {
-        return ss.get();
+        return ss.get().intValue();
     }
 
     private void setSI(int value) {
-        si.set(value);
+        si.set(BigInteger.valueOf(value));
     }
 
     private void setDI(int value) {
-        di.set(value);
+        di.set(BigInteger.valueOf(value));
     }
 
     private void setBP(int value) {
-        bp.set(value);
+        bp.set(BigInteger.valueOf(value));
     }
 
     private void setSP(int value) {
-        sp.set(value);
+        sp.set(BigInteger.valueOf(value));
     }
 
     private void setCS(int value) {
-        cs.set(value);
+        cs.set(BigInteger.valueOf(value));
     }
 
     private void setDS(int value) {
-        ds.set(value);
+        ds.set(BigInteger.valueOf(value));
     }
 
     private void setES(int value) {
-        es.set(value);
+        es.set(BigInteger.valueOf(value));
     }
 
     private void setSS(int value) {
-        ss.set(value);
+        ss.set(BigInteger.valueOf(value));
     }
 
     boolean CF;
@@ -256,12 +287,14 @@ public class Core {
         setMemByte(index + 1, (short) ((s >>> 8) & 0xff));
     }
 
-    public Core(int memorySize) {
-        memory = new short[memorySize];
+    public Core(int memorySizeKB) {
+        memory = new short[memorySizeKB * 1024];
+        core=this;
     }
 
-    public boolean run(String cmd) {
-        String[] strings = cmd.split(" ");
+    public boolean runCmd(String cmd) {
+        MainGUI.mainGUI.addData(cmd);
+        String[] strings = Tool.stringToCmd(cmd.toUpperCase()).split(" ");
         try {
             switch (strings[0]) {
                 case "ADD" -> {
@@ -306,9 +339,56 @@ public class Core {
                                                 setMemByte(index, addByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), addWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                case "SUB" -> {
+                    switch (strings[1]) {
+                        case "BYTE" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMemByte(stringToMemIndex(sss[0]), subByte(getMemByte(index), stringToByte(sss[1])));
+                        }
+                        case "WORD" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMemWord(stringToMemIndex(sss[0]), subWord(getMemWord(index), stringToWord(sss[1])));
+                        }
+                        default -> {
+                            String[] sss = strings[1].split(",");
+                            switch (sss[0]) {
+                                case "AH" -> setAH(subByte(getAH(), stringToByte(sss[1])));
+                                case "AL" -> setAL(subByte(getAL(), stringToByte(sss[1])));
+                                case "BH" -> setBH(subByte(getBH(), stringToByte(sss[1])));
+                                case "BL" -> setBL(subByte(getBL(), stringToByte(sss[1])));
+                                case "CH" -> setCH(subByte(getCH(), stringToByte(sss[1])));
+                                case "CL" -> setCL(subByte(getCL(), stringToByte(sss[1])));
+                                case "DH" -> setDH(subByte(getDH(), stringToByte(sss[1])));
+                                case "DL" -> setDL(subByte(getDL(), stringToByte(sss[1])));
+                                case "AX" -> setAX(subWord(getAX(), stringToWord(sss[1])));
+                                case "BX" -> setBX(subWord(getBX(), stringToWord(sss[1])));
+                                case "CX" -> setCX(subWord(getCX(), stringToWord(sss[1])));
+                                case "DX" -> setDX(subWord(getDX(), stringToWord(sss[1])));
+                                case "SI" -> setSI(subWord(getSI(), stringToWord(sss[1])));
+                                case "DI" -> setDI(subWord(getDI(), stringToWord(sss[1])));
+                                case "BP" -> setBP(subWord(getBP(), stringToWord(sss[1])));
+                                case "SP" -> setSP(subWord(getSP(), stringToWord(sss[1])));
+                                case "CS" -> setCS(subWord(getCS(), stringToWord(sss[1])));
+                                case "DS" -> setDS(subWord(getDS(), stringToWord(sss[1])));
+                                case "ES" -> setES(subWord(getES(), stringToWord(sss[1])));
+                                case "SS" -> setSS(subWord(getSS(), stringToWord(sss[1])));
+                                default -> {
+                                    int index = stringToMemIndex(sss[0]);
+                                    switch (sss[1]) {
+                                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                                setMemByte(index, subByte(getMemByte(index), stringToByte(sss[1])));
+                                        case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
+                                                setMemWord(stringToMemIndex(sss[0]), subWord(getMemWord(index), stringToWord(sss[1])));
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -357,9 +437,7 @@ public class Core {
                                                 setMemByte(index, andByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), andWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -408,9 +486,7 @@ public class Core {
                                                 setMemByte(index, orByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), orWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -459,9 +535,7 @@ public class Core {
                                                 setMemByte(index, xorByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), xorWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -510,9 +584,7 @@ public class Core {
                                                 setMemByte(index, shlByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), shlWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -561,9 +633,7 @@ public class Core {
                                                 setMemByte(index, shrByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), shrWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -612,9 +682,7 @@ public class Core {
                                                 setMemByte(index, rolByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), rolWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -663,9 +731,7 @@ public class Core {
                                                 setMemByte(index, rorByte(getMemByte(index), stringToByte(sss[1])));
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), rorWord(getMemWord(index), stringToWord(sss[1])));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
@@ -674,8 +740,10 @@ public class Core {
                 }
                 case "NOT" -> {
                     switch (strings[1]) {
-                        case "BYTE" -> setMemByte(stringToMemIndex(strings[2]), notByte(getMemByte(stringToMemIndex(strings[2]))));
-                        case "WORD" -> setMemWord(stringToMemIndex(strings[2]), notWord(getMemWord(stringToMemIndex(strings[2]))));
+                        case "BYTE" ->
+                                setMemByte(stringToMemIndex(strings[2]), notByte(getMemByte(stringToMemIndex(strings[2]))));
+                        case "WORD" ->
+                                setMemWord(stringToMemIndex(strings[2]), notWord(getMemWord(stringToMemIndex(strings[2]))));
                         default -> {
                             switch (strings[1]) {
                                 case "AH" -> setAH(notByte(getAH()));
@@ -698,17 +766,17 @@ public class Core {
                                 case "DS" -> setDS(notWord(getDS()));
                                 case "ES" -> setES(notWord(getES()));
                                 case "SS" -> setSS(notWord(getSS()));
-                                default -> {
-                                    return false;
-                                }
+                                default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                             }
                         }
                     }
                 }
                 case "NEG" -> {
                     switch (strings[1]) {
-                        case "BYTE" -> setMemByte(stringToMemIndex(strings[2]), negByte(getMemByte(stringToMemIndex(strings[2]))));
-                        case "WORD" -> setMemWord(stringToMemIndex(strings[2]), negWord(getMemWord(stringToMemIndex(strings[2]))));
+                        case "BYTE" ->
+                                setMemByte(stringToMemIndex(strings[2]), negByte(getMemByte(stringToMemIndex(strings[2]))));
+                        case "WORD" ->
+                                setMemWord(stringToMemIndex(strings[2]), negWord(getMemWord(stringToMemIndex(strings[2]))));
                         default -> {
                             switch (strings[1]) {
                                 case "AH" -> setAH(negByte(getAH()));
@@ -731,9 +799,7 @@ public class Core {
                                 case "DS" -> setDS(negWord(getDS()));
                                 case "ES" -> setES(negWord(getES()));
                                 case "SS" -> setSS(negWord(getSS()));
-                                default -> {
-                                    return false;
-                                }
+                                default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                             }
                         }
                     }
@@ -776,44 +842,226 @@ public class Core {
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
                                                 setMemByte(index, stringToByte(sss[1]));
-                                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI","CS", "DS", "ES", "SS" ->
+                                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
                                                 setMemWord(stringToMemIndex(sss[0]), stringToWord(sss[1]));
-                                        default -> {
-                                            return false;
-                                        }
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
                             }
                         }
                     }
                 }
+                case "MUL" -> {
+                    switch (strings[1]) {
+                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" -> mulByte(stringToByte(strings[1]));
+                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
+                                mulWord(stringToWord(strings[1]));
+                        case "BYTE" -> mulByte(stringToByte(strings[2]));
+                        case "WORD" -> mulWord(stringToWord(strings[2]));
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
+                case "DIV" -> {
+                    switch (strings[1]) {
+                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" -> divByte(stringToByte(strings[1]));
+                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
+                                divWord(stringToWord(strings[1]));
+                        case "BYTE" -> divByte(stringToByte(strings[2]));
+                        case "WORD" -> divWord(stringToWord(strings[2]));
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
+                case "PUSH" -> {
+                    switch (strings[1]) {
+                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
+                                pushWord(stringToWord(strings[1]));
+                        case "WORD" -> pushWord(stringToWord(strings[2]));
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
+                case "POP" -> {
+                    switch (strings[1]) {
+                        case "AX" -> setAX(popWord());
+                        case "BX" -> setBX(popWord());
+                        case "CX" -> setCX(popWord());
+                        case "DX" -> setDX(popWord());
+                        case "BP" -> setBP(popWord());
+                        case "SP" -> setSP(popWord());
+                        case "SI" -> setSI(popWord());
+                        case "DI" -> setDI(popWord());
+                        case "CS" -> setCS(popWord());
+                        case "DS" -> setDS(popWord());
+                        case "ES" -> setES(popWord());
+                        case "SS" -> setSS(popWord());
+                        case "WORD" -> setMemWord(stringToMemIndex(strings[2]), popWord());
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
                 case "CLD" -> cld();
                 case "STD" -> std();
-                default -> {
+                case "JMP" -> {
+                    jmp(strings[1]);
                     return false;
                 }
+                case "JZ" -> {
+                    if (isZF()){
+                        jmp(strings[1]);
+                        return false;
+                    }
+                }
+                case "JNZ" -> {
+                    if (!isZF()){
+                        jmp(strings[1]);
+                        return false;
+                    }
+                }
+                default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
+            MainGUI.mainGUI.addData(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
     }
 
 
+    public int stringToMemIndex(String string) {
+        String s = string.replace("[", "");
+        s = s.replace("]", "");
+        String[] strings = s.split(":");
+        if (strings.length < 2) {
+            String[] sss = s.split("\\+");
+            if (sss.length < 2) {
+                return (getDS() << 4) + stringToWord(s);
+            } else {
+                return (getDS() << 4) + stringToWord(sss[0]) + stringToWord(sss[1]);
+            }
+        } else {
+            String[] sss = strings[1].split("\\+");
+            if (sss.length < 2) {
+                return (stringToWord(strings[0]) << 4) + stringToWord(strings[1]);
+            } else {
+                return (stringToWord(strings[0]) << 4) + stringToWord(sss[0]) + stringToWord(sss[1]);
+            }
+        }
+    }
 
-    private void setFLAG(int v,String vString, int rs, int size) {
-        OF = v != rs;
-        ZF = rs == 0;
+    private short stringToByte(String string) {
+        if (string.startsWith("[")) {
+            String s = string.substring(1, string.length() - 1);
+            return getMemByte(stringToMemIndex(s));
+        } else if (string.startsWith("'")) {
+            String s = string.substring(1, string.length() - 1);
+            return s.getBytes()[0];
+        } else {
+            if (string.startsWith("0X")) {
+                return Short.parseShort(string.substring(2), 16);
+            } else if (string.endsWith("H")) {
+                return Short.parseShort(string.substring(0, string.length() - 1), 16);
+            } else if (string.endsWith("D")) {
+                return Short.parseShort(string.substring(0, string.length() - 1));
+            } else if (string.endsWith("B")) {
+                return Short.parseShort(string.substring(0, string.length() - 1), 2);
+            } else {
+                try {
+                    return Byte.parseByte(string);
+                } catch (Exception e) {
+                    return switch (string) {
+                        case "AH" -> getAH();
+                        case "AL" -> getAL();
+                        case "BH" -> getBH();
+                        case "BL" -> getBL();
+                        case "CH" -> getCH();
+                        case "CL" -> getCL();
+                        case "DH" -> getDH();
+                        case "DL" -> getDL();
+                        default -> {
+                            BigInteger bigInteger = findValue(string);
+                            if (bigInteger == null) {
+                                throw new RuntimeException("这玩意有问题,你他妈在扯淡");
+                            } else {
+                                yield (short) (bigInteger.intValue() & 0xFF);
+                            }
+                        }
+                    };
+                }
+            }
+        }
+    }
+
+    private int stringToWord(String string) {
+        if (string.startsWith("[")) {
+            String s = string.substring(1, string.length() - 1);
+            return getMemWord(stringToMemIndex(s));
+        } else if (string.startsWith("'")) {
+            String s = string.substring(1, string.length() - 1);
+            return s.getBytes()[0] + (s.getBytes()[1] << 8);
+        } else {
+            if (string.startsWith("0X")) {
+                return Integer.parseInt(string.substring(2), 16);
+            } else if (string.endsWith("H")) {
+                return Integer.parseInt(string.substring(0, string.length() - 1), 16);
+            } else if (string.endsWith("D")) {
+                return Integer.parseInt(string.substring(0, string.length() - 1));
+            } else if (string.endsWith("B")) {
+                return Integer.parseInt(string.substring(0, string.length() - 1), 2);
+            } else {
+                try {
+                    return Integer.parseInt(string);
+                } catch (Exception e) {
+                    return switch (string) {
+                        case "AX" -> getAX();
+                        case "BX" -> getBX();
+                        case "CX" -> getCX();
+                        case "DX" -> getDX();
+                        case "SI" -> getSI();
+                        case "DI" -> getDI();
+                        case "SP" -> getSP();
+                        case "BP" -> getBP();
+                        case "CS" -> getCS();
+                        case "DS" -> getDS();
+                        case "ES" -> getES();
+                        case "SS" -> getSS();
+                        default -> {
+                            BigInteger bigInteger = findValue(string);
+                            if (bigInteger == null) {
+                                throw new RuntimeException("这玩意有问题,你他妈在扯淡");
+                            } else {
+                                yield bigInteger.intValue() & 0xFFFF;
+                            }
+                        }
+                    };
+                }
+            }
+        }
+    }
+
+
+    private void setFLAG(BigInteger v, String vString, BigInteger rs, int size) {
+        OF = v.compareTo(rs) != 0;
+        ZF = rs.compareTo(BigInteger.ZERO) == 0;
         if (vString.length() > size) {
             SF = vString.substring(vString.length() - size).startsWith("1");
-        }else if (vString.length() == size){
+        } else if (vString.length() == size) {
             SF = vString.startsWith("1");
-        }else {
+        } else {
             SF = false;
         }
         PF = countCharacter(vString, '1') % 2 == 0;
     }
 
+
+
+    private void jmp(String string) {
+        CmdList cmdList= findCmdList(string);
+        if (cmdList.isAddGlobal()){
+            setLabelListString(cmdList.getLabelListString());
+        }else {
+            setLabelListString(this.getLabelListString()+"\r\n"+cmdList.getLabelListString());
+        }
+        cmdList.runCmdList();
+    }
 
 
     private short addByte(short a, short b) {
@@ -831,13 +1079,27 @@ public class Core {
     }
 
     private void addSetFLAG(int a, int b, int v, int rs, int size) {
-        int rsAF=(a&0xF)+(b&0xF);
+        int rsAF = (a & 0xF) + (b & 0xF);
         AF = Integer.toString(rsAF, 2).length() > 4;
         String s = Integer.toString(v, 2);
         CF = s.length() > size;
-        setFLAG(v, s, rs, size);
+        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
     }
 
+
+    private short subByte(short a, short b) {
+        int v = a + negByte(b);
+        short rs = (short) (v & 0xFF);
+        addSetFLAG(a, b, v, rs, 8);
+        return rs;
+    }
+
+    private int subWord(int a, int b) {
+        int v = a + negWord(b);
+        int rs = v & 0xFFFF;
+        addSetFLAG(a, b, v, rs, 16);
+        return rs;
+    }
 
 
     private byte andByte(short a, short b) {
@@ -885,9 +1147,8 @@ public class Core {
     private void and_or_xorSetFLAG(int v, int rs, int size) {
         CF = false;
         AF = false;
-        setFLAG(v, Integer.toString(v, 2), rs, size);
+        setFLAG(BigInteger.valueOf(v), Integer.toString(v, 2), BigInteger.valueOf(rs), size);
     }
-
 
 
     private short shlByte(short a, short b) {
@@ -906,14 +1167,14 @@ public class Core {
 
     private short rolByte(short a, short b) {
         int v = a << b;
-        short rs = (byte) (((v & 0xFF)+((v & 0xFFFFFF00)>>>8))&0xFF);
+        short rs = (byte) (((v & 0xFF) + ((v & 0xFFFFFF00) >>> 8)) & 0xFF);
         lSetFLAG(v, rs, 8);
         return (short) (rs & 0xFF);
     }
 
     private int rolWord(int a, int b) {
         int v = a << b;
-        int rs = (short) (((v & 0xFFFF)+((v & 0xFFFF0000)>>>16))&0xFFFF);
+        int rs = (short) (((v & 0xFFFF) + ((v & 0xFFFF0000) >>> 16)) & 0xFFFF);
         lSetFLAG(v, rs, 8);
         return rs & 0xFFFF;
     }
@@ -921,7 +1182,7 @@ public class Core {
     private void lSetFLAG(int v, int rs, int size) {
         String s = Integer.toString(v, 2);
         CF = s.length() > size;
-        setFLAG(v, s, rs, size);
+        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
     }
 
     private short shrByte(short a, short b) {
@@ -940,14 +1201,14 @@ public class Core {
 
     private short rorByte(short a, short b) {
         int v = a >>> b;
-        short rs = (byte) (((v & 0xFF)+((v & 0xFFFFFF00)>>>8))&0xFF);
+        short rs = (byte) (((v & 0xFF) + ((v & 0xFFFFFF00) >>> 8)) & 0xFF);
         rSetFLAG(v, rs, 8);
         return (short) (rs & 0xFF);
     }
 
     private int rorWord(int a, int b) {
         int v = a >>> b;
-        int rs = (short) (((v & 0xFFFF)+((v & 0xFFFF0000)>>>16))&0xFFFF);
+        int rs = (short) (((v & 0xFFFF) + ((v & 0xFFFF0000) >>> 16)) & 0xFFFF);
         rSetFLAG(v, rs, 8);
         return rs & 0xFFFF;
     }
@@ -955,9 +1216,8 @@ public class Core {
     private void rSetFLAG(int v, int rs, int size) {
         String s = Integer.toString(v, 2);
         CF = s.length() > size;
-        setFLAG(v, s, rs, size);
+        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
     }
-
 
 
     private short notByte(short a) {
@@ -969,23 +1229,55 @@ public class Core {
     }
 
     private short negByte(short a) {
-        return (short) ((notByte(a)+1)&0xFF);
+        return (short) ((notByte(a) + 1) & 0xFF);
     }
 
     private int negWord(int a) {
-        return (notWord(a)+1)&0xFFFF;
+        return (notWord(a) + 1) & 0xFFFF;
     }
 
 
-
-    private void cld(){
-        DF=false;
+    private void mulByte(short a) {
+        int v = getAL() * a;
+        setFLAG(BigInteger.valueOf(v), Integer.toString(v, 2), BigInteger.valueOf(v & 0xff), 16);
+        CF = OF;
+        setAX(v);
     }
 
-    private void std(){
-        DF=true;
+    private void mulWord(int a) {
+        long v = ((long) getAX()) * a;
+        setFLAG(BigInteger.valueOf(v), Long.toString(v, 2), BigInteger.valueOf(v & 0xffff), 16);
+        CF = OF;
+        setAX((int) (v & 0xffff));
+        setDX((int) ((v & 0xffff0000L) >>> 16));
     }
 
+
+    private void divByte(short a) {
+        int d = getAX();
+        int v = d / a;
+        int r = d % a;
+        setAL((short) v);
+        setAH((short) r);
+    }
+
+    private void divWord(int a) {
+        long d = getAX();
+        d += (long) getDX() << 16;
+        long v = d / a;
+        long r = d % a;
+        setAX((int) v);
+        setDX((int) r);
+    }
+
+
+    private void cld() {
+        DF = false;
+    }
+
+    private void std() {
+        DF = true;
+    }
 
 
     public static int countCharacter(String str, char targetChar) {
@@ -998,84 +1290,16 @@ public class Core {
         return count;
     }
 
-    public int stringToMemIndex(String string) {
-        String s = string.replace("[", "");
-        s = s.replace("]", "");
-        String[] strings=s.split(":");
-        if (strings.length==1){
-            return (getDS()<<4)+stringToWord(s);
-        }else {
-            return (stringToWord(strings[0])<<4)+stringToWord(strings[1]);
-        }
+
+    public void pushWord(int s) {
+        setSP((getSP() - 2) & 0xFFFF);
+        setMemWord((getSS() << 4) + getSP(), s);
     }
 
-    private short stringToByte(String string) {
-        if (string.startsWith("[")) {
-            String s= string.substring(1, string.length() - 1);
-            return getMemByte(stringToWord(s));
-        }else {
-            if (string.startsWith("0X")) {
-                return Short.parseShort(string.substring(2), 16);
-            } else if (string.endsWith("H")) {
-                return Short.parseShort(string.substring(0, string.length() - 1), 16);
-            } else if (string.endsWith("D")) {
-                return Short.parseShort(string.substring(0, string.length() - 1));
-            } else if (string.endsWith("B")) {
-                return Short.parseShort(string.substring(0, string.length() - 1), 2);
-            } else {
-                try {
-                    return Byte.parseByte(string);
-                } catch (Exception e) {
-                    return switch (string) {
-                        case "AH" -> getAH();
-                        case "AL" -> getAL();
-                        case "BH" -> getBH();
-                        case "BL" -> getBL();
-                        case "CH" -> getCH();
-                        case "CL" -> getCL();
-                        case "DH" -> getDH();
-                        case "DL" -> getDL();
-                        default -> throw new RuntimeException("寄存器不存在,你他妈在扯淡");
-                    };
-                }
-            }
-        }
+    public int popWord() {
+        int s = getMemWord((getSS() << 4) + getSP());
+        setSP((getSP() + 2) & 0xFFFF);
+        return s;
     }
 
-    private int stringToWord(String string) {
-        if (string.startsWith("[")) {
-            String s= string.substring(1, string.length() - 1);
-            return getMemWord(stringToWord(s));
-        }else {
-            if (string.startsWith("0X")) {
-                return Integer.parseInt(string.substring(2), 16);
-            } else if (string.endsWith("H")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1), 16);
-            } else if (string.endsWith("D")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1));
-            } else if (string.endsWith("B")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1), 2);
-            } else {
-                try {
-                    return Integer.parseInt(string);
-                } catch (Exception e) {
-                    return switch (string) {
-                        case "AX" -> getAX();
-                        case "BX" -> getBX();
-                        case "CX" -> getCX();
-                        case "DX" -> getDX();
-                        case "SI" -> getSI();
-                        case "DI" -> getDI();
-                        case "SP" -> getSP();
-                        case "BP" -> getBP();
-                        case "CS" -> getCS();
-                        case "DS" -> getDS();
-                        case "ES" -> getES();
-                        case "SS" -> getSS();
-                        default -> throw new RuntimeException("寄存器不存在,你他妈在扯淡");
-                    };
-                }
-            }
-        }
-    }
 }

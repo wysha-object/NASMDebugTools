@@ -2,19 +2,20 @@ package cn.com.wysha.GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GetValue extends JDialog {
+public class GetValueGUI extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JSpinner spinner1;
-    public int value=4096;
+    public int value=1024;
 
-    public GetValue() {
+    public GetValueGUI() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        setAlwaysOnTop(true);
+        setUndecorated(true);
 
         Dimension dimension=Toolkit.getDefaultToolkit().getScreenSize();
         setSize(dimension.width/2,dimension.height/2);
@@ -22,18 +23,11 @@ public class GetValue extends JDialog {
 
         spinner1.setValue(value);
 
-        buttonOK.addActionListener(e -> onOK());
+        buttonOK.addActionListener(_ -> onOK());
     }
 
     private void onOK() {
         value= (int) spinner1.getValue();
         dispose();
-    }
-
-    public static void main(String[] args) {
-        GetValue dialog = new GetValue();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }
