@@ -1055,15 +1055,17 @@ public class Core extends LabelList {
 
 
     private void setFLAG(BigInteger v, String vString, BigInteger rs, int sizeByte) {
-        OF = v.compareTo(rs) != 0;
-        ZF = rs.compareTo(BigInteger.ZERO) == 0;
-        if (vString.length() > sizeByte*8) {
-            SF = vString.substring(vString.length() - sizeByte*8).startsWith("1");
-        } else if (vString.length() == sizeByte*8) {
-            SF = vString.startsWith("1");
-        } else {
+        BigInteger vBigInteger = v;
+        if (vString.length()>=sizeByte*8&& vString.startsWith("1".repeat(sizeByte*16))){
+            vBigInteger=v.and(new BigInteger("F".repeat(sizeByte*2),16));
+        }
+        if (vString.length()>=sizeByte*8){
+            SF = vString.charAt(vString.length() - sizeByte * 8) == '1';
+        }else {
             SF = false;
         }
+        OF = vBigInteger.compareTo(rs) != 0;
+        ZF = rs.compareTo(BigInteger.ZERO) == 0;
         PF = countCharacter(vString, '1') % 2 == 0;
     }
 
@@ -1082,14 +1084,14 @@ public class Core extends LabelList {
 
     private BigInteger add(BigInteger d, BigInteger s,int sizeByte) {
         BigInteger v = d.add(s);
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
     }
 
     private BigInteger sub(BigInteger d, BigInteger s,int sizeByte) {
         BigInteger v = d.subtract(s);
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
     }
@@ -1097,7 +1099,7 @@ public class Core extends LabelList {
     private void add_subSetFLAG(BigInteger d, BigInteger s, BigInteger v, BigInteger rs, int sizeByte) {
         BigInteger rsAF = d.and(BigInteger.valueOf(0xF)).add(s.and(BigInteger.valueOf(0xF)));
         AF = rsAF.toString(2).length() > 4;
-        String string = v.toString(2);
+        String string = v.and(new BigInteger("F".repeat(sizeByte*4),16)).toString(2);
         CF = string.length() > sizeByte*8;
         setFLAG(v, string, rs, sizeByte);
     }
@@ -1106,21 +1108,21 @@ public class Core extends LabelList {
 
     private BigInteger and(BigInteger d, BigInteger b, int sizeByte) {
         BigInteger v = d.and(b);
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
     private BigInteger or(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.or(s);
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
     private BigInteger xor(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.xor(s);
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
@@ -1135,16 +1137,16 @@ public class Core extends LabelList {
 
     private BigInteger shl(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftLeft(s.intValue());
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         lSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
     private BigInteger rol(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftLeft(s.intValue());
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16)).add(v.shiftRight(sizeByte*8 - s.intValue()));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16)).add(v.shiftRight(sizeByte*8 - s.intValue()));
         lSetFLAG(v, rs, 8);
-        return rs.and(new BigInteger("f".repeat(sizeByte*2),2));
+        return rs.and(new BigInteger("F".repeat(sizeByte*2),2));
     }
 
     private void lSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
@@ -1155,7 +1157,7 @@ public class Core extends LabelList {
 
     private BigInteger shr(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftRight(s.intValue());
-        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
         rSetFLAG(v, rs, sizeByte);
         return rs;
     }
@@ -1164,7 +1166,7 @@ public class Core extends LabelList {
         BigInteger v = d.shiftRight(s.intValue());
         BigInteger rs = v.add(v.and(new BigInteger("1".repeat(s.intValue()),2).shiftLeft(s.intValue())));
         rSetFLAG(v, rs, sizeByte);
-        return rs.and(new BigInteger("f".repeat(sizeByte*2),16));
+        return rs.and(new BigInteger("F".repeat(sizeByte*2),16));
     }
 
     private void rSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
@@ -1175,7 +1177,7 @@ public class Core extends LabelList {
 
 
     private BigInteger not(BigInteger a,int sizeByte) {
-        return a.not().and(new BigInteger("f".repeat(sizeByte*2),16));
+        return a.not().and(new BigInteger("F".repeat(sizeByte*2),16));
     }
 
 
