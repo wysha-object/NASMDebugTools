@@ -7,23 +7,23 @@ import java.math.BigInteger;
 import java.util.HashSet;
 
 public class Core extends LabelList {
-    private final HashSet<CmdList> cmdListArrayList = new HashSet<>();
+    private final HashSet<CmdList> cmdListHashSet = new HashSet<>();
     public static Core core;
 
     public CmdList[] allCmdList() {
-        return cmdListArrayList.toArray(new CmdList[0]);
+        return cmdListHashSet.toArray(new CmdList[0]);
     }
 
     public void addCmdList(CmdList cmdList) {
-        cmdListArrayList.add(cmdList);
+        cmdListHashSet.add(cmdList);
     }
 
     public void removeCmdList(CmdList cmdList) {
-        cmdListArrayList.remove(cmdList);
+        cmdListHashSet.remove(cmdList);
     }
 
     public CmdList findCmdList(String cmdListName) {
-        for (CmdList cmdList : cmdListArrayList) {
+        for (CmdList cmdList : cmdListHashSet) {
             if (cmdList.getName().equals(cmdListName)) {
                 return cmdList;
             }
@@ -878,6 +878,104 @@ public class Core extends LabelList {
                         }
                     }
                 }
+                case "INC" ->{
+                    switch (strings[1]) {
+                        case "BYTE" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), inc(getMem(index,1),1),1);
+                        }
+                        case "WORD" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), inc(getMem(index,2),2),2);
+                        }
+                        default -> {
+                            String[] sss = strings[1].split(",");
+                            switch (sss[0]) {
+                                case "AH" -> setAH(inc(getAH(),1));
+                                case "AL" -> setAL(inc(getAL(),1));
+                                case "BH" -> setBH(inc(getBH(),1));
+                                case "BL" -> setBL(inc(getBL(),1));
+                                case "CH" -> setCH(inc(getCH(),1));
+                                case "CL" -> setCL(inc(getCL(),1));
+                                case "DH" -> setDH(inc(getDH(),1));
+                                case "DL" -> setDL(inc(getDL(),1));
+                                case "AX" -> setAX(inc(getAX(),2));
+                                case "BX" -> setBX(inc(getBX(),2));
+                                case "CX" -> setCX(inc(getCX(),2));
+                                case "DX" -> setDX(inc(getDX(),2));
+                                case "SI" -> setSI(inc(getSI(),2));
+                                case "DI" -> setDI(inc(getDI(),2));
+                                case "BP" -> setBP(inc(getBP(),2));
+                                case "SP" -> setSP(inc(getSP(),2));
+                                case "CS" -> setCS(inc(getCS(),2));
+                                case "DS" -> setDS(inc(getDS(),2));
+                                case "ES" -> setES(inc(getES(),2));
+                                case "SS" -> setSS(inc(getSS(),2));
+                                default -> {
+                                    int index = stringToMemIndex(sss[0]);
+                                    switch (sss[1]) {
+                                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                                setMem(index, inc(getMem(index,1),1),1);
+                                        case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
+                                                setMem(index, inc(getMem(index,2),2),2);
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                case "DEC" ->{
+                    switch (strings[1]) {
+                        case "BYTE" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), dec(getMem(index,1),1),1);
+                        }
+                        case "WORD" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), dec(getMem(index,2),2),2);
+                        }
+                        default -> {
+                            String[] sss = strings[1].split(",");
+                            switch (sss[0]) {
+                                case "AH" -> setAH(dec(getAH(),1));
+                                case "AL" -> setAL(dec(getAL(),1));
+                                case "BH" -> setBH(dec(getBH(),1));
+                                case "BL" -> setBL(dec(getBL(),1));
+                                case "CH" -> setCH(dec(getCH(),1));
+                                case "CL" -> setCL(dec(getCL(),1));
+                                case "DH" -> setDH(dec(getDH(),1));
+                                case "DL" -> setDL(dec(getDL(),1));
+                                case "AX" -> setAX(dec(getAX(),2));
+                                case "BX" -> setBX(dec(getBX(),2));
+                                case "CX" -> setCX(dec(getCX(),2));
+                                case "DX" -> setDX(dec(getDX(),2));
+                                case "SI" -> setSI(dec(getSI(),2));
+                                case "DI" -> setDI(dec(getDI(),2));
+                                case "BP" -> setBP(dec(getBP(),2));
+                                case "SP" -> setSP(dec(getSP(),2));
+                                case "CS" -> setCS(dec(getCS(),2));
+                                case "DS" -> setDS(dec(getDS(),2));
+                                case "ES" -> setES(dec(getES(),2));
+                                case "SS" -> setSS(dec(getSS(),2));
+                                default -> {
+                                    int index = stringToMemIndex(sss[0]);
+                                    switch (sss[1]) {
+                                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                                setMem(index, dec(getMem(index,1),1),1);
+                                        case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
+                                                setMem(index, dec(getMem(index,2),2),2);
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 case "MUL" -> {
                     switch (strings[1]) {
                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
@@ -898,22 +996,6 @@ public class Core extends LabelList {
                         case "BYTE" -> div(stringToNumber(strings[2],1),1);
                         case "WORD" -> div(stringToNumber(strings[2],2),2);
                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
-                    }
-                }
-                case "JMP" -> {
-                    jmp(strings[1]);
-                    return false;
-                }
-                case "JZ" -> {
-                    if (isZF()){
-                        jmp(strings[1]);
-                        return false;
-                    }
-                }
-                case "JNZ" -> {
-                    if (!isZF()){
-                        jmp(strings[1]);
-                        return false;
                     }
                 }
                 case "PUSH" -> {
@@ -941,6 +1023,51 @@ public class Core extends LabelList {
                         case "WORD" -> setMem(stringToMemIndex(strings[2]), pop(2),2);
                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                     }
+                }
+                case "LOOP" -> {
+                    setCX(getCX().subtract(BigInteger.valueOf(1)).and(BigInteger.valueOf(0xffff)));
+                    if (getCX().intValue() != 0) {
+                        jmp(strings[1]);
+                        return false;
+                    }
+                }
+                case "CALL" -> {
+                    if (strings[1].equals("FAR")) {
+                        push(getCS(),2);
+                        push(BigInteger.valueOf(0),2);
+                        jmp(strings[1]);
+                    }else {
+                        push(getCS(),2);
+                        jmp(strings[1]);
+                    }
+                    return true;
+                }
+                case "JMP" -> {
+                    jmp(strings[strings.length-1]);
+                    return false;
+                }
+                case "JZ" -> {
+                    if (isZF()){
+                        jmp(strings[strings.length-1]);
+                        return false;
+                    }
+                }
+                case "JNZ" -> {
+                    if (!isZF()){
+                        jmp(strings[strings.length-1]);
+                        return false;
+                    }
+                }
+                case "RET" -> {
+                    if (strings[1].equals("FAR")) {
+                        setCS(pop(2));
+                        pop(2);
+                        jmp(strings[2]);
+                    }else {
+                        setCS(pop(2));
+                        jmp(strings[1]);
+                    }
+                    return false;
                 }
                 case "CLD" -> cld();
                 case "STD" -> std();
@@ -1073,26 +1200,33 @@ public class Core extends LabelList {
 
     private void jmp(String string) {
         CmdList cmdList= findCmdList(string);
+        String lString = this.getLabelListString();
         if (cmdList.isAddGlobal()){
-            setLabelListString(cmdList.getLabelListString());
+            setLabelListString(lString+"\r\n"+cmdList.getLabelListString());
         }else {
-            setLabelListString(this.getLabelListString()+"\r\n"+cmdList.getLabelListString());
+            setLabelListString(cmdList.getLabelListString());
         }
+        this.setLabelListString(lString);
         cmdList.runCmdList();
     }
+
 
 
     private BigInteger add(BigInteger d, BigInteger s,int sizeByte) {
         BigInteger v = d.add(s);
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         add_subSetFLAG(d, s, v, rs, sizeByte);
+
         return rs;
     }
 
     private BigInteger sub(BigInteger d, BigInteger s,int sizeByte) {
         BigInteger v = d.subtract(s);
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         add_subSetFLAG(d, s, v, rs, sizeByte);
+
         return rs;
     }
 
@@ -1101,6 +1235,35 @@ public class Core extends LabelList {
         AF = rsAF.toString(2).length() > 4;
         String string = v.and(new BigInteger("F".repeat(sizeByte*4),16)).toString(2);
         CF = string.length() > sizeByte*8;
+
+        setFLAG(v, string, rs, sizeByte);
+    }
+
+
+
+    private BigInteger inc(BigInteger d, int sizeByte){
+        BigInteger v = d.add(BigInteger.valueOf(1));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
+        inc_decSetFLAG(d, BigInteger.valueOf(1), v, rs, sizeByte);
+
+        return rs;
+    }
+
+    private BigInteger dec(BigInteger d, int sizeByte){
+        BigInteger v = d.subtract(BigInteger.valueOf(1));
+        BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
+        inc_decSetFLAG(d, BigInteger.valueOf(-1), v, rs, sizeByte);
+
+        return rs;
+    }
+
+    private void inc_decSetFLAG(BigInteger d, BigInteger s, BigInteger v, BigInteger rs, int sizeByte) {
+        BigInteger rsAF = d.and(BigInteger.valueOf(0xF)).add(s.and(BigInteger.valueOf(0xF)));
+        AF = rsAF.toString(2).length() > 4;
+        String string = v.and(new BigInteger("F".repeat(sizeByte*4),16)).toString(2);
+
         setFLAG(v, string, rs, sizeByte);
     }
 
@@ -1109,27 +1272,34 @@ public class Core extends LabelList {
     private BigInteger and(BigInteger d, BigInteger b, int sizeByte) {
         BigInteger v = d.and(b);
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         and_or_xorSetFLAG(v, rs, sizeByte);
+
         return rs;
     }
 
     private BigInteger or(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.or(s);
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         and_or_xorSetFLAG(v, rs, sizeByte);
+
         return rs;
     }
 
     private BigInteger xor(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.xor(s);
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         and_or_xorSetFLAG(v, rs, sizeByte);
+
         return rs;
     }
 
     private void and_or_xorSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
         CF = false;
         AF = false;
+
         setFLAG(v, v.toString(2), rs, sizeByte);
     }
 
@@ -1138,40 +1308,50 @@ public class Core extends LabelList {
     private BigInteger shl(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftLeft(s.intValue());
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         lSetFLAG(v, rs, sizeByte);
+
         return rs;
     }
 
     private BigInteger rol(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftLeft(s.intValue());
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16)).add(v.shiftRight(sizeByte*8 - s.intValue()));
+
         lSetFLAG(v, rs, 8);
+
         return rs.and(new BigInteger("F".repeat(sizeByte*2),2));
     }
 
     private void lSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
         String s = v.toString(2);
         CF = s.length() > sizeByte*8;
+
         setFLAG(v, s, rs, sizeByte);
     }
 
     private BigInteger shr(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftRight(s.intValue());
         BigInteger rs = v.and(new BigInteger("F".repeat(sizeByte*2),16));
+
         rSetFLAG(v, rs, sizeByte);
+
         return rs;
     }
 
     private BigInteger ror(BigInteger d, BigInteger s, int sizeByte) {
         BigInteger v = d.shiftRight(s.intValue());
         BigInteger rs = v.add(v.and(new BigInteger("1".repeat(s.intValue()),2).shiftLeft(s.intValue())));
+
         rSetFLAG(v, rs, sizeByte);
+
         return rs.and(new BigInteger("F".repeat(sizeByte*2),16));
     }
 
     private void rSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
         String s = v.toString(2);
         CF = s.length() > sizeByte;
+
         setFLAG(v, s, rs, sizeByte);
     }
 
@@ -1196,14 +1376,15 @@ public class Core extends LabelList {
         }else {
             return;
         }
-        setFLAG(v, v.toString(2), v.and(new BigInteger("F".repeat(sizeByte*2),16)), sizeByte);
-        CF = OF;
         if (sizeByte == 1) {
             setAX(v);
         } else {
             setAX(v.and(BigInteger.valueOf(0xFFFF)));
             setDX(v.shiftRight(16));
         }
+
+        setFLAG(v, v.toString(2), v.and(new BigInteger("F".repeat(sizeByte*2),16)), sizeByte);
+        CF = OF;
     }
 
 

@@ -29,7 +29,7 @@ public class CmdListEditGUI extends JDialog {
 
         buttonOK.addActionListener(_ -> onOK());
         cancelButton.addActionListener(_ -> dispose());
-        editLocalLabelButton.addActionListener(_ -> new EditLabelListGUI(cmdList));
+        editLocalLabelButton.addActionListener(_ -> new EditLabelListGUI(cmdList).setVisible(true));
         endModeComboBox.addItem(EndMode.STOP);
         endModeComboBox.addItem(EndMode.RUN);
 

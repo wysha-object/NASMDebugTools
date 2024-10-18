@@ -26,6 +26,6 @@ public abstract class LabelList {
     }
 
     public BigInteger findValue(String label){
-        return labelMap.getOrDefault(label, null);
+        return labelMap.get(label);
     }
 }
