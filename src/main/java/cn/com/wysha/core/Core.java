@@ -1088,7 +1088,7 @@ public class Core extends LabelList {
     }
 
     private BigInteger sub(BigInteger d, BigInteger s,int sizeByte) {
-        BigInteger v = d.add(neg(s, sizeByte));
+        BigInteger v = d.subtract(s);
         BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
         add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
