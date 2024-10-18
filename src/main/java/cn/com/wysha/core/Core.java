@@ -785,35 +785,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMem(stringToMemIndex(sss[0]), not(getMem(index,1)),1);
+                            setMem(stringToMemIndex(sss[0]), not(getMem(index,1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMem(stringToMemIndex(sss[0]), not(getMem(index,2)),2);
+                            setMem(stringToMemIndex(sss[0]), not(getMem(index,2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(not(getAH()));
-                                case "AL" -> setAL(not(getAL()));
-                                case "BH" -> setBH(not(getBH()));
-                                case "BL" -> setBL(not(getBL()));
-                                case "CH" -> setCH(not(getCH()));
-                                case "CL" -> setCL(not(getCL()));
-                                case "DH" -> setDH(not(getDH()));
-                                case "DL" -> setDL(not(getDL()));
-                                case "AX" -> setAX(not(getAX()));
-                                case "BX" -> setBX(not(getBX()));
-                                case "CX" -> setCX(not(getCX()));
-                                case "DX" -> setDX(not(getDX()));
+                                case "AH" -> setAH(not(getAH(),1));
+                                case "AL" -> setAL(not(getAL(),1));
+                                case "BH" -> setBH(not(getBH(),1));
+                                case "BL" -> setBL(not(getBL(),1));
+                                case "CH" -> setCH(not(getCH(),1));
+                                case "CL" -> setCL(not(getCL(),1));
+                                case "DH" -> setDH(not(getDH(),1));
+                                case "DL" -> setDL(not(getDL(),1));
+                                case "AX" -> setAX(not(getAX(),2));
+                                case "BX" -> setBX(not(getBX(),2));
+                                case "CX" -> setCX(not(getCX(),2));
+                                case "DX" -> setDX(not(getDX(),2));
+                                case "SI" -> setSI(not(getSI(),2));
+                                case "DI" -> setDI(not(getDI(),2));
+                                case "BP" -> setBP(not(getBP(),2));
+                                case "SP" -> setSP(not(getSP(),2));
+                                case "CS" -> setCS(not(getCS(),2));
+                                case "DS" -> setDS(not(getDS(),2));
+                                case "ES" -> setES(not(getES(),2));
+                                case "SS" -> setSS(not(getSS(),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMem(index, not(getMem(index,1)),1);
+                                                setMem(index, not(getMem(index,1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMem(index, not(getMem(index,2)),2);
+                                                setMem(index, not(getMem(index,2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -826,35 +834,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,1)),1);
+                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,2)),2);
+                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(neg(getAH()));
-                                case "AL" -> setAL(neg(getAL()));
-                                case "BH" -> setBH(neg(getBH()));
-                                case "BL" -> setBL(neg(getBL()));
-                                case "CH" -> setCH(neg(getCH()));
-                                case "CL" -> setCL(neg(getCL()));
-                                case "DH" -> setDH(neg(getDH()));
-                                case "DL" -> setDL(neg(getDL()));
-                                case "AX" -> setAX(neg(getAX()));
-                                case "BX" -> setBX(neg(getBX()));
-                                case "CX" -> setCX(neg(getCX()));
-                                case "DX" -> setDX(neg(getDX()));
+                                case "AH" -> setAH(neg(getAH(),1));
+                                case "AL" -> setAL(neg(getAL(),1));
+                                case "BH" -> setBH(neg(getBH(),1));
+                                case "BL" -> setBL(neg(getBL(),1));
+                                case "CH" -> setCH(neg(getCH(),1));
+                                case "CL" -> setCL(neg(getCL(),1));
+                                case "DH" -> setDH(neg(getDH(),1));
+                                case "DL" -> setDL(neg(getDL(),1));
+                                case "AX" -> setAX(neg(getAX(),2));
+                                case "BX" -> setBX(neg(getBX(),2));
+                                case "CX" -> setCX(neg(getCX(),2));
+                                case "DX" -> setDX(neg(getDX(),2));
+                                case "SI" -> setSI(neg(getSI(),2));
+                                case "DI" -> setDI(neg(getDI(),2));
+                                case "BP" -> setBP(neg(getBP(),2));
+                                case "SP" -> setSP(neg(getSP(),2));
+                                case "CS" -> setCS(neg(getCS(),2));
+                                case "DS" -> setDS(neg(getDS(),2));
+                                case "ES" -> setES(neg(getES(),2));
+                                case "SS" -> setSS(neg(getSS(),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMem(index, neg(getMem(index,1)),1);
+                                                setMem(index, neg(getMem(index,1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMem(index, neg(getMem(index,2)),2);
+                                                setMem(index, neg(getMem(index,2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -1072,7 +1088,7 @@ public class Core extends LabelList {
     }
 
     private BigInteger sub(BigInteger d, BigInteger s,int sizeByte) {
-        BigInteger v = d.add(neg(s));
+        BigInteger v = d.add(neg(s, sizeByte));
         BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
         add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
@@ -1151,21 +1167,21 @@ public class Core extends LabelList {
         return rs.and(new BigInteger("f".repeat(sizeByte*2),16));
     }
 
-    private void rSetFLAG(BigInteger v, BigInteger rs, int size) {
+    private void rSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
         String s = v.toString(2);
-        CF = s.length() > size;
-        setFLAG(v, s, rs, size);
+        CF = s.length() > sizeByte;
+        setFLAG(v, s, rs, sizeByte);
     }
 
 
-    private BigInteger not(BigInteger a) {
-        return a.not();
+    private BigInteger not(BigInteger a,int sizeByte) {
+        return a.not().and(new BigInteger("f".repeat(sizeByte*2),16));
     }
 
 
 
-    private BigInteger neg(BigInteger a) {
-        return not(a).add(BigInteger.ONE);
+    private BigInteger neg(BigInteger a, int sizeByte) {
+        return not(a,sizeByte).add(BigInteger.ONE);
     }
 
 
