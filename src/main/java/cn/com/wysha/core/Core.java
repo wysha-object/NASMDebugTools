@@ -41,108 +41,108 @@ public class Core extends LabelList {
     Register dh = new Register();
     Register dl = new Register();
 
-    public short getAH() {
-        return ah.get().shortValue();
+    public BigInteger getAH() {
+        return ah.get();
     }
 
-    public short getAL() {
-        return al.get().shortValue();
+    public BigInteger getAL() {
+        return al.get();
     }
 
-    public short getBH() {
-        return bh.get().shortValue();
+    public BigInteger getBH() {
+        return bh.get();
     }
 
-    public short getBL() {
-        return bl.get().shortValue();
+    public BigInteger getBL() {
+        return bl.get();
     }
 
-    public short getCH() {
-        return ch.get().shortValue();
+    public BigInteger getCH() {
+        return ch.get();
     }
 
-    public short getCL() {
-        return cl.get().shortValue();
+    public BigInteger getCL() {
+        return cl.get();
     }
 
-    public short getDH() {
-        return dh.get().shortValue();
+    public BigInteger getDH() {
+        return dh.get();
     }
 
-    public short getDL() {
-        return dl.get().shortValue();
+    public BigInteger getDL() {
+        return dl.get();
     }
 
-    public void setAH(short value) {
-        ah.set(BigInteger.valueOf(value));
+    public void setAH(BigInteger value) {
+        ah.set(value);
     }
 
-    public void setAL(short value) {
-        al.set(BigInteger.valueOf(value));
+    public void setAL(BigInteger value) {
+        al.set(value);
     }
 
-    public void setBH(short value) {
-        bh.set(BigInteger.valueOf(value));
+    public void setBH(BigInteger value) {
+        bh.set(value);
     }
 
-    public void setBL(short value) {
-        bl.set(BigInteger.valueOf(value));
+    public void setBL(BigInteger value) {
+        bl.set(value);
     }
 
-    public void setCH(short value) {
-        ch.set(BigInteger.valueOf(value));
+    public void setCH(BigInteger value) {
+        ch.set(value);
     }
 
-    public void setCL(short value) {
-        cl.set(BigInteger.valueOf(value));
+    public void setCL(BigInteger value) {
+        cl.set(value);
     }
 
-    public void setDH(short value) {
-        dh.set(BigInteger.valueOf(value));
+    public void setDH(BigInteger value) {
+        dh.set(value);
     }
 
-    public void setDL(short value) {
-        dl.set(BigInteger.valueOf(value));
+    public void setDL(BigInteger value) {
+        dl.set(value);
     }
 
-    public int hlToWord(short highByte, short lowByte) {
-        return (highByte << 8) | lowByte;
+    public BigInteger hlToWord(BigInteger highByte, BigInteger lowByte) {
+        return highByte.shiftLeft(8).or(lowByte);
     }
 
-    public int getAX() {
+    public BigInteger getAX() {
         return hlToWord(getAH(), getAL());
     }
 
-    public int getBX() {
+    public BigInteger getBX() {
         return hlToWord(getBH(), getBL());
     }
 
-    public int getCX() {
+    public BigInteger getCX() {
         return hlToWord(getCH(), getCL());
     }
 
-    public int getDX() {
+    public BigInteger getDX() {
         return hlToWord(getDH(), getDL());
     }
 
-    private void setHL(Register h, Register l, int value) {
-        h.set(BigInteger.valueOf((value >>> 8) & 0xff));
-        l.set(BigInteger.valueOf(value & 0xff));
+    private void setHL(Register h, Register l, BigInteger value) {
+        h.set(value.shiftRight(8).and(BigInteger.valueOf(0xff)));
+        l.set(value.and(BigInteger.valueOf(0xff)));
     }
 
-    private void setAX(int value) {
+    private void setAX(BigInteger value) {
         setHL(ah, al, value);
     }
 
-    private void setBX(int value) {
+    private void setBX(BigInteger value) {
         setHL(bh, bl, value);
     }
 
-    private void setCX(int value) {
+    private void setCX(BigInteger value) {
         setHL(ch, cl, value);
     }
 
-    private void setDX(int value) {
+    private void setDX(BigInteger value) {
         setHL(dh, dl, value);
     }
 
@@ -156,68 +156,68 @@ public class Core extends LabelList {
     Register es = new Register();
     Register ss = new Register();
 
-    public int getSI() {
-        return si.get().intValue();
+    public BigInteger getSI() {
+        return si.get();
     }
 
-    public int getDI() {
-        return di.get().intValue();
+    public BigInteger getDI() {
+        return di.get();
     }
 
-    public int getBP() {
-        return bp.get().intValue();
+    public BigInteger getBP() {
+        return bp.get();
     }
 
-    public int getSP() {
-        return sp.get().intValue();
+    public BigInteger getSP() {
+        return sp.get();
     }
 
-    public int getCS() {
-        return cs.get().intValue();
+    public BigInteger getCS() {
+        return cs.get();
     }
 
-    public int getDS() {
-        return ds.get().intValue();
+    public BigInteger getDS() {
+        return ds.get();
     }
 
-    public int getES() {
-        return es.get().intValue();
+    public BigInteger getES() {
+        return es.get();
     }
 
-    public int getSS() {
-        return ss.get().intValue();
+    public BigInteger getSS() {
+        return ss.get();
     }
 
-    private void setSI(int value) {
-        si.set(BigInteger.valueOf(value));
+    private void setSI(BigInteger value) {
+        si.set(value);
     }
 
-    private void setDI(int value) {
-        di.set(BigInteger.valueOf(value));
+    private void setDI(BigInteger value) {
+        di.set(value);
     }
 
-    private void setBP(int value) {
-        bp.set(BigInteger.valueOf(value));
+    private void setBP(BigInteger value) {
+        bp.set(value);
     }
 
-    private void setSP(int value) {
-        sp.set(BigInteger.valueOf(value));
+    private void setSP(BigInteger value) {
+        sp.set(value);
     }
 
-    private void setCS(int value) {
-        cs.set(BigInteger.valueOf(value));
+    private void setCS(BigInteger value) {
+        cs.set(value);
     }
 
-    private void setDS(int value) {
-        ds.set(BigInteger.valueOf(value));
+    private void setDS(BigInteger value) {
+        ds.set(value);
     }
 
-    private void setES(int value) {
-        es.set(BigInteger.valueOf(value));
+    private void setES(BigInteger value) {
+        es.set(value);
     }
 
-    private void setSS(int value) {
-        ss.set(BigInteger.valueOf(value));
+    private void setSS(BigInteger value) {
+        ss.set(value);
     }
 
     boolean CF;
@@ -268,23 +268,18 @@ public class Core extends LabelList {
         return OF;
     }
 
-    public short getMemByte(int index) {
-        return memory[index];
-    }
-
-    public int getMemWord(int index) {
-        int rs = getMemByte(index);
-        rs += getMemByte(index + 1) << 8;
+    public BigInteger getMem(int index,int sizeByte) {
+        BigInteger rs = BigInteger.ZERO;
+        for (int i = 0; i < sizeByte; i++) {
+            rs = rs.add(BigInteger.valueOf(memory[index + i]).shiftLeft(i * 8));
+        }
         return rs;
     }
 
-    public void setMemByte(int index, short s) {
-        memory[index] = s;
-    }
-
-    public void setMemWord(int index, int s) {
-        setMemByte(index, (short) (s & 0xff));
-        setMemByte(index + 1, (short) ((s >>> 8) & 0xff));
+    public void setMem(int index, BigInteger s,int sizeByte) {
+        for (int i = 0; i < sizeByte; i++) {
+            memory[index + i] = s.shiftRight(i * 8).and(BigInteger.valueOf(0xff)).shortValue();
+        }
     }
 
     public Core(int memorySizeKB) {
@@ -297,48 +292,95 @@ public class Core extends LabelList {
         String[] strings = Tool.stringToCmd(cmd.toUpperCase()).split(" ");
         try {
             switch (strings[0]) {
+                case "MOV" -> {
+                    switch (strings[1]) {
+                        case "BYTE" -> {
+                            String[] sss = strings[2].split(",");
+                            setMem(stringToMemIndex(sss[0]), stringToNumber(sss[1],1),1);
+                        }
+                        case "WORD" -> {
+                            String[] sss = strings[2].split(",");
+                            setMem(stringToMemIndex(sss[0]), stringToNumber(sss[1],2),2);
+                        }
+                        default -> {
+                            String[] sss = strings[1].split(",");
+                            switch (sss[0]) {
+                                case "AH" -> setAH(stringToNumber(sss[1],1));
+                                case "AL" -> setAL(stringToNumber(sss[1],1));
+                                case "BH" -> setBH(stringToNumber(sss[1],1));
+                                case "BL" -> setBL(stringToNumber(sss[1],1));
+                                case "CH" -> setCH(stringToNumber(sss[1],1));
+                                case "CL" -> setCL(stringToNumber(sss[1],1));
+                                case "DH" -> setDH(stringToNumber(sss[1],1));
+                                case "DL" -> setDL(stringToNumber(sss[1],1));
+                                case "AX" -> setAX(stringToNumber(sss[1],2));
+                                case "BX" -> setBX(stringToNumber(sss[1],2));
+                                case "CX" -> setCX(stringToNumber(sss[1],2));
+                                case "DX" -> setDX(stringToNumber(sss[1],2));
+                                case "BP" -> setBP(stringToNumber(sss[1],2));
+                                case "SP" -> setSP(stringToNumber(sss[1],2));
+                                case "SI" -> setSI(stringToNumber(sss[1],2));
+                                case "DI" -> setDI(stringToNumber(sss[1],2));
+                                case "CS" -> setCS(stringToNumber(sss[1],2));
+                                case "DS" -> setDS(stringToNumber(sss[1],2));
+                                case "ES" -> setES(stringToNumber(sss[1],2));
+                                case "SS" -> setSS(stringToNumber(sss[1],2));
+                                default -> {
+                                    int index = stringToMemIndex(sss[0]);
+                                    switch (sss[1]) {
+                                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                                setMem(index, stringToNumber((sss[1]),1),1);
+                                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
+                                                setMem(index, stringToNumber((sss[1]),2),2);
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 case "ADD" -> {
                     switch (strings[1]) {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), addByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), add(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), addWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), add(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(addByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(addByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(addByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(addByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(addByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(addByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(addByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(addByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(addWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(addWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(addWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(addWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(addWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(addWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(addWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(addWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(addWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(addWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(addWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(addWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(add(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(add(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(add(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(add(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(add(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(add(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(add(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(add(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(add(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(add(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(add(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(add(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(add(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(add(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(add(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(add(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(add(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(add(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(add(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(add(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, addByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, add(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), addWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, add(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -351,43 +393,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), subByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), sub(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), subWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), sub(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(subByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(subByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(subByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(subByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(subByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(subByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(subByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(subByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(subWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(subWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(subWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(subWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(subWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(subWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(subWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(subWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(subWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(subWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(subWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(subWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(sub(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(sub(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(sub(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(sub(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(sub(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(sub(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(sub(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(sub(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(sub(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(sub(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(sub(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(sub(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(sub(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(sub(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(sub(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(sub(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(sub(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(sub(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(sub(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(sub(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, subByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, sub(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), subWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, sub(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -400,43 +442,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), andByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), and(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), andWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), and(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(andByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(andByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(andByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(andByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(andByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(andByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(andByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(andByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(andWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(andWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(andWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(andWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(andWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(andWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(andWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(andWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(andWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(andWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(andWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(andWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(and(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(and(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(and(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(and(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(and(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(and(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(and(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(and(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(and(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(and(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(and(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(and(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(and(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(and(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(and(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(and(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(and(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(and(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(and(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(and(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, andByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, and(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), andWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, and(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -449,43 +491,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), orByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), or(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), orWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), or(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(orByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(orByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(orByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(orByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(orByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(orByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(orByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(orByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(orWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(orWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(orWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(orWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(orWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(orWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(orWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(orWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(orWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(orWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(orWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(orWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(or(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(or(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(or(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(or(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(or(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(or(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(or(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(or(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(or(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(or(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(or(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(or(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(or(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(or(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(or(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(or(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(or(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(or(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(or(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(or(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, orByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, or(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), orWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, or(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -498,43 +540,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), xorByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), xor(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), xorWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), xor(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(xorByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(xorByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(xorByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(xorByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(xorByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(xorByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(xorByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(xorByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(xorWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(xorWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(xorWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(xorWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(xorWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(xorWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(xorWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(xorWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(xorWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(xorWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(xorWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(xorWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(xor(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(xor(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(xor(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(xor(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(xor(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(xor(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(xor(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(xor(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(xor(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(xor(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(xor(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(xor(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(xor(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(xor(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(xor(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(xor(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(xor(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(xor(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(xor(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(xor(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, xorByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, xor(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), xorWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, xor(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -547,43 +589,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), shlByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), shl(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), shlWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), shl(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(shlByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(shlByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(shlByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(shlByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(shlByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(shlByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(shlByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(shlByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(shlWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(shlWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(shlWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(shlWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(shlWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(shlWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(shlWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(shlWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(shlWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(shlWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(shlWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(shlWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(shl(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(shl(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(shl(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(shl(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(shl(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(shl(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(shl(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(shl(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(shl(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(shl(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(shl(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(shl(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(shl(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(shl(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(shl(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(shl(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(shl(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(shl(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(shl(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(shl(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, shlByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, shl(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), shlWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, shl(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -596,43 +638,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), shrByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), shr(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), shrWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), shr(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(shrByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(shrByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(shrByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(shrByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(shrByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(shrByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(shrByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(shrByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(shrWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(shrWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(shrWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(shrWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(shrWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(shrWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(shrWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(shrWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(shrWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(shrWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(shrWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(shrWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(shr(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(shr(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(shr(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(shr(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(shr(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(shr(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(shr(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(shr(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(shr(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(shr(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(shr(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(shr(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(shr(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(shr(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(shr(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(shr(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(shr(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(shr(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(shr(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(shr(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, shrByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, shr(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), shrWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, shr(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -645,43 +687,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), rolByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), rol(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), rolWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), rol(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(rolByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(rolByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(rolByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(rolByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(rolByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(rolByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(rolByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(rolByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(rolWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(rolWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(rolWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(rolWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(rolWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(rolWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(rolWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(rolWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(rolWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(rolWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(rolWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(rolWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(rol(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(rol(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(rol(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(rol(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(rol(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(rol(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(rol(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(rol(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(rol(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(rol(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(rol(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(rol(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(rol(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(rol(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(rol(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(rol(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(rol(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(rol(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(rol(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(rol(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, rolByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, rol(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), rolWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, rol(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -694,43 +736,43 @@ public class Core extends LabelList {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemByte(stringToMemIndex(sss[0]), rorByte(getMemByte(index), stringToByte(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), ror(getMem(index,1), stringToNumber(sss[1],1),1),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
                             int index = stringToMemIndex(sss[0]);
-                            setMemWord(stringToMemIndex(sss[0]), rorWord(getMemWord(index), stringToWord(sss[1])));
+                            setMem(stringToMemIndex(sss[0]), ror(getMem(index,2), stringToNumber(sss[1],2),2),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(rorByte(getAH(), stringToByte(sss[1])));
-                                case "AL" -> setAL(rorByte(getAL(), stringToByte(sss[1])));
-                                case "BH" -> setBH(rorByte(getBH(), stringToByte(sss[1])));
-                                case "BL" -> setBL(rorByte(getBL(), stringToByte(sss[1])));
-                                case "CH" -> setCH(rorByte(getCH(), stringToByte(sss[1])));
-                                case "CL" -> setCL(rorByte(getCL(), stringToByte(sss[1])));
-                                case "DH" -> setDH(rorByte(getDH(), stringToByte(sss[1])));
-                                case "DL" -> setDL(rorByte(getDL(), stringToByte(sss[1])));
-                                case "AX" -> setAX(rorWord(getAX(), stringToWord(sss[1])));
-                                case "BX" -> setBX(rorWord(getBX(), stringToWord(sss[1])));
-                                case "CX" -> setCX(rorWord(getCX(), stringToWord(sss[1])));
-                                case "DX" -> setDX(rorWord(getDX(), stringToWord(sss[1])));
-                                case "SI" -> setSI(rorWord(getSI(), stringToWord(sss[1])));
-                                case "DI" -> setDI(rorWord(getDI(), stringToWord(sss[1])));
-                                case "BP" -> setBP(rorWord(getBP(), stringToWord(sss[1])));
-                                case "SP" -> setSP(rorWord(getSP(), stringToWord(sss[1])));
-                                case "CS" -> setCS(rorWord(getCS(), stringToWord(sss[1])));
-                                case "DS" -> setDS(rorWord(getDS(), stringToWord(sss[1])));
-                                case "ES" -> setES(rorWord(getES(), stringToWord(sss[1])));
-                                case "SS" -> setSS(rorWord(getSS(), stringToWord(sss[1])));
+                                case "AH" -> setAH(ror(getAH(), stringToNumber(sss[1],1),1));
+                                case "AL" -> setAL(ror(getAL(), stringToNumber(sss[1],1),1));
+                                case "BH" -> setBH(ror(getBH(), stringToNumber(sss[1],1),1));
+                                case "BL" -> setBL(ror(getBL(), stringToNumber(sss[1],1),1));
+                                case "CH" -> setCH(ror(getCH(), stringToNumber(sss[1],1),1));
+                                case "CL" -> setCL(ror(getCL(), stringToNumber(sss[1],1),1));
+                                case "DH" -> setDH(ror(getDH(), stringToNumber(sss[1],1),1));
+                                case "DL" -> setDL(ror(getDL(), stringToNumber(sss[1],1),1));
+                                case "AX" -> setAX(ror(getAX(), stringToNumber(sss[1],2),2));
+                                case "BX" -> setBX(ror(getBX(), stringToNumber(sss[1],2),2));
+                                case "CX" -> setCX(ror(getCX(), stringToNumber(sss[1],2),2));
+                                case "DX" -> setDX(ror(getDX(), stringToNumber(sss[1],2),2));
+                                case "SI" -> setSI(ror(getSI(), stringToNumber(sss[1],2),2));
+                                case "DI" -> setDI(ror(getDI(), stringToNumber(sss[1],2),2));
+                                case "BP" -> setBP(ror(getBP(), stringToNumber(sss[1],2),2));
+                                case "SP" -> setSP(ror(getSP(), stringToNumber(sss[1],2),2));
+                                case "CS" -> setCS(ror(getCS(), stringToNumber(sss[1],2),2));
+                                case "DS" -> setDS(ror(getDS(), stringToNumber(sss[1],2),2));
+                                case "ES" -> setES(ror(getES(), stringToNumber(sss[1],2),2));
+                                case "SS" -> setSS(ror(getSS(), stringToNumber(sss[1],2),2));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, rorByte(getMemByte(index), stringToByte(sss[1])));
+                                                setMem(index, ror(getMem(index,1), stringToNumber(sss[1],1),1),1);
                                         case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), rorWord(getMemWord(index), stringToWord(sss[1])));
+                                                setMem(index, ror(getMem(index,2), stringToNumber(sss[2],2),2),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -740,110 +782,79 @@ public class Core extends LabelList {
                 }
                 case "NOT" -> {
                     switch (strings[1]) {
-                        case "BYTE" ->
-                                setMemByte(stringToMemIndex(strings[2]), notByte(getMemByte(stringToMemIndex(strings[2]))));
-                        case "WORD" ->
-                                setMemWord(stringToMemIndex(strings[2]), notWord(getMemWord(stringToMemIndex(strings[2]))));
+                        case "BYTE" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), not(getMem(index,1)),1);
+                        }
+                        case "WORD" -> {
+                            String[] sss = strings[2].split(",");
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), not(getMem(index,2)),2);
+                        }
                         default -> {
-                            switch (strings[1]) {
-                                case "AH" -> setAH(notByte(getAH()));
-                                case "AL" -> setAL(notByte(getAL()));
-                                case "BH" -> setBH(notByte(getBH()));
-                                case "BL" -> setBL(notByte(getBL()));
-                                case "CH" -> setCH(notByte(getCH()));
-                                case "CL" -> setCL(notByte(getCL()));
-                                case "DH" -> setDH(notByte(getDH()));
-                                case "DL" -> setDL(notByte(getDL()));
-                                case "AX" -> setAX(notWord(getAX()));
-                                case "BX" -> setBX(notWord(getBX()));
-                                case "CX" -> setCX(notWord(getCX()));
-                                case "DX" -> setDX(notWord(getDX()));
-                                case "SI" -> setSI(notWord(getSI()));
-                                case "DI" -> setDI(notWord(getDI()));
-                                case "BP" -> setBP(notWord(getBP()));
-                                case "SP" -> setSP(notWord(getSP()));
-                                case "CS" -> setCS(notWord(getCS()));
-                                case "DS" -> setDS(notWord(getDS()));
-                                case "ES" -> setES(notWord(getES()));
-                                case "SS" -> setSS(notWord(getSS()));
-                                default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                            String[] sss = strings[1].split(",");
+                            switch (sss[0]) {
+                                case "AH" -> setAH(not(getAH()));
+                                case "AL" -> setAL(not(getAL()));
+                                case "BH" -> setBH(not(getBH()));
+                                case "BL" -> setBL(not(getBL()));
+                                case "CH" -> setCH(not(getCH()));
+                                case "CL" -> setCL(not(getCL()));
+                                case "DH" -> setDH(not(getDH()));
+                                case "DL" -> setDL(not(getDL()));
+                                case "AX" -> setAX(not(getAX()));
+                                case "BX" -> setBX(not(getBX()));
+                                case "CX" -> setCX(not(getCX()));
+                                case "DX" -> setDX(not(getDX()));
+                                default -> {
+                                    int index = stringToMemIndex(sss[0]);
+                                    switch (sss[1]) {
+                                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                                setMem(index, not(getMem(index,1)),1);
+                                        case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
+                                                setMem(index, not(getMem(index,2)),2);
+                                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                                    }
+                                }
                             }
                         }
                     }
                 }
                 case "NEG" -> {
                     switch (strings[1]) {
-                        case "BYTE" ->
-                                setMemByte(stringToMemIndex(strings[2]), negByte(getMemByte(stringToMemIndex(strings[2]))));
-                        case "WORD" ->
-                                setMemWord(stringToMemIndex(strings[2]), negWord(getMemWord(stringToMemIndex(strings[2]))));
-                        default -> {
-                            switch (strings[1]) {
-                                case "AH" -> setAH(negByte(getAH()));
-                                case "AL" -> setAL(negByte(getAL()));
-                                case "BH" -> setBH(negByte(getBH()));
-                                case "BL" -> setBL(negByte(getBL()));
-                                case "CH" -> setCH(negByte(getCH()));
-                                case "CL" -> setCL(negByte(getCL()));
-                                case "DH" -> setDH(negByte(getDH()));
-                                case "DL" -> setDL(negByte(getDL()));
-                                case "AX" -> setAX(negWord(getAX()));
-                                case "BX" -> setBX(negWord(getBX()));
-                                case "CX" -> setCX(negWord(getCX()));
-                                case "DX" -> setDX(negWord(getDX()));
-                                case "SI" -> setSI(negWord(getSI()));
-                                case "DI" -> setDI(negWord(getDI()));
-                                case "BP" -> setBP(negWord(getBP()));
-                                case "SP" -> setSP(negWord(getSP()));
-                                case "CS" -> setCS(negWord(getCS()));
-                                case "DS" -> setDS(negWord(getDS()));
-                                case "ES" -> setES(negWord(getES()));
-                                case "SS" -> setSS(negWord(getSS()));
-                                default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
-                            }
-                        }
-                    }
-                }
-                case "MOV" -> {
-                    switch (strings[1]) {
                         case "BYTE" -> {
                             String[] sss = strings[2].split(",");
-                            setMemByte(stringToMemIndex(sss[0]), stringToByte(sss[1]));
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,1)),1);
                         }
                         case "WORD" -> {
                             String[] sss = strings[2].split(",");
-                            setMemWord(stringToMemIndex(sss[0]), stringToWord(sss[1]));
+                            int index = stringToMemIndex(sss[0]);
+                            setMem(stringToMemIndex(sss[0]), neg(getMem(index,2)),2);
                         }
                         default -> {
                             String[] sss = strings[1].split(",");
                             switch (sss[0]) {
-                                case "AH" -> setAH(stringToByte(sss[1]));
-                                case "AL" -> setAL(stringToByte(sss[1]));
-                                case "BH" -> setBH(stringToByte(sss[1]));
-                                case "BL" -> setBL(stringToByte(sss[1]));
-                                case "CH" -> setCH(stringToByte(sss[1]));
-                                case "CL" -> setCL(stringToByte(sss[1]));
-                                case "DH" -> setDH(stringToByte(sss[1]));
-                                case "DL" -> setDL(stringToByte(sss[1]));
-                                case "AX" -> setAX(stringToWord(sss[1]));
-                                case "BX" -> setBX(stringToWord(sss[1]));
-                                case "CX" -> setCX(stringToWord(sss[1]));
-                                case "DX" -> setDX(stringToWord(sss[1]));
-                                case "SI" -> setSI(stringToWord(sss[1]));
-                                case "DI" -> setDI(stringToWord(sss[1]));
-                                case "BP" -> setBP(stringToWord(sss[1]));
-                                case "SP" -> setSP(stringToWord(sss[1]));
-                                case "CS" -> setCS(stringToWord(sss[1]));
-                                case "DS" -> setDS(stringToWord(sss[1]));
-                                case "ES" -> setES(stringToWord(sss[1]));
-                                case "SS" -> setSS(stringToWord(sss[1]));
+                                case "AH" -> setAH(neg(getAH()));
+                                case "AL" -> setAL(neg(getAL()));
+                                case "BH" -> setBH(neg(getBH()));
+                                case "BL" -> setBL(neg(getBL()));
+                                case "CH" -> setCH(neg(getCH()));
+                                case "CL" -> setCL(neg(getCL()));
+                                case "DH" -> setDH(neg(getDH()));
+                                case "DL" -> setDL(neg(getDL()));
+                                case "AX" -> setAX(neg(getAX()));
+                                case "BX" -> setBX(neg(getBX()));
+                                case "CX" -> setCX(neg(getCX()));
+                                case "DX" -> setDX(neg(getDX()));
                                 default -> {
                                     int index = stringToMemIndex(sss[0]);
                                     switch (sss[1]) {
                                         case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
-                                                setMemByte(index, stringToByte(sss[1]));
-                                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
-                                                setMemWord(stringToMemIndex(sss[0]), stringToWord(sss[1]));
+                                                setMem(index, neg(getMem(index,1)),1);
+                                        case "AX", "BX", "CX", "DX", "SI", "DI", "BP", "SP", "CS", "DS", "ES", "SS" ->
+                                                setMem(index, neg(getMem(index,2)),2);
                                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                                     }
                                 }
@@ -853,52 +864,26 @@ public class Core extends LabelList {
                 }
                 case "MUL" -> {
                     switch (strings[1]) {
-                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" -> mulByte(stringToByte(strings[1]));
+                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                mul(stringToNumber(strings[1],1),1);
                         case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
-                                mulWord(stringToWord(strings[1]));
-                        case "BYTE" -> mulByte(stringToByte(strings[2]));
-                        case "WORD" -> mulWord(stringToWord(strings[2]));
+                                mul(stringToNumber(strings[1],2),2);
+                        case "BYTE" -> mul(stringToNumber(strings[2],1),1);
+                        case "WORD" -> mul(stringToNumber(strings[2],2),2);
                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                     }
                 }
                 case "DIV" -> {
                     switch (strings[1]) {
-                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" -> divByte(stringToByte(strings[1]));
+                        case "AH", "AL", "BH", "BL", "CH", "CL", "DH", "DL" ->
+                                div(stringToNumber(strings[1],1),1);
                         case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
-                                divWord(stringToWord(strings[1]));
-                        case "BYTE" -> divByte(stringToByte(strings[2]));
-                        case "WORD" -> divWord(stringToWord(strings[2]));
+                                div(stringToNumber(strings[1],2),2);
+                        case "BYTE" -> div(stringToNumber(strings[2],1),1);
+                        case "WORD" -> div(stringToNumber(strings[2],2),2);
                         default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
                     }
                 }
-                case "PUSH" -> {
-                    switch (strings[1]) {
-                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
-                                pushWord(stringToWord(strings[1]));
-                        case "WORD" -> pushWord(stringToWord(strings[2]));
-                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
-                    }
-                }
-                case "POP" -> {
-                    switch (strings[1]) {
-                        case "AX" -> setAX(popWord());
-                        case "BX" -> setBX(popWord());
-                        case "CX" -> setCX(popWord());
-                        case "DX" -> setDX(popWord());
-                        case "BP" -> setBP(popWord());
-                        case "SP" -> setSP(popWord());
-                        case "SI" -> setSI(popWord());
-                        case "DI" -> setDI(popWord());
-                        case "CS" -> setCS(popWord());
-                        case "DS" -> setDS(popWord());
-                        case "ES" -> setES(popWord());
-                        case "SS" -> setSS(popWord());
-                        case "WORD" -> setMemWord(stringToMemIndex(strings[2]), popWord());
-                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
-                    }
-                }
-                case "CLD" -> cld();
-                case "STD" -> std();
                 case "JMP" -> {
                     jmp(strings[1]);
                     return false;
@@ -915,6 +900,34 @@ public class Core extends LabelList {
                         return false;
                     }
                 }
+                case "PUSH" -> {
+                    switch (strings[1]) {
+                        case "AX", "BX", "CX", "DX", "BP", "SP", "SI", "DI", "CS", "DS", "ES", "SS" ->
+                                push(stringToNumber(strings[1],2),2);
+                        case "WORD" -> push(stringToNumber(strings[2],2),2);
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
+                case "POP" -> {
+                    switch (strings[1]) {
+                        case "AX" -> setAX(pop(2));
+                        case "BX" -> setBX(pop(2));
+                        case "CX" -> setCX(pop(2));
+                        case "DX" -> setDX(pop(2));
+                        case "BP" -> setBP(pop(2));
+                        case "SP" -> setSP(pop(2));
+                        case "SI" -> setSI(pop(2));
+                        case "DI" -> setDI(pop(2));
+                        case "CS" -> setCS(pop(2));
+                        case "DS" -> setDS(pop(2));
+                        case "ES" -> setES(pop(2));
+                        case "SS" -> setSS(pop(2));
+                        case "WORD" -> setMem(stringToMemIndex(strings[2]), pop(2),2);
+                        default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
+                    }
+                }
+                case "CLD" -> cld();
+                case "STD" -> std();
                 default -> throw new RuntimeException("指令他妈不存在,你在他妈的扯淡");
             }
         } catch (Exception e) {
@@ -935,117 +948,102 @@ public class Core extends LabelList {
         if (strings.length < 2) {
             String[] sss = s.split("\\+");
             if (sss.length < 2) {
-                return (getDS() << 4) + stringToWord(s);
+                return (getDS().shiftLeft(4)).add(stringToNumber(s,2)).intValue();
             } else {
-                return (getDS() << 4) + stringToWord(sss[0]) + stringToWord(sss[1]);
+                return (getDS().shiftLeft(4)).add(stringToNumber(sss[0],2)).add(stringToNumber(sss[1],2)).intValue();
             }
         } else {
             String[] sss = strings[1].split("\\+");
             if (sss.length < 2) {
-                return (stringToWord(strings[0]) << 4) + stringToWord(strings[1]);
+                return (stringToNumber(strings[0],2).shiftLeft(4)).add(stringToNumber(strings[1],2)).intValue();
             } else {
-                return (stringToWord(strings[0]) << 4) + stringToWord(sss[0]) + stringToWord(sss[1]);
+                return (stringToNumber(strings[0],2).shiftLeft(4)).add(stringToNumber(sss[0],2)).add(stringToNumber(sss[1],2)).intValue();
             }
         }
     }
 
-    private short stringToByte(String string) {
+    private BigInteger stringToNumber(String string, int sizeByte) {
         if (string.startsWith("[")) {
             String s = string.substring(1, string.length() - 1);
-            return getMemByte(stringToMemIndex(s));
+            return getMem(stringToMemIndex(s),sizeByte);
         } else if (string.startsWith("'")) {
             String s = string.substring(1, string.length() - 1);
-            return s.getBytes()[0];
-        } else {
-            if (string.startsWith("0X")) {
-                return Short.parseShort(string.substring(2), 16);
-            } else if (string.endsWith("H")) {
-                return Short.parseShort(string.substring(0, string.length() - 1), 16);
-            } else if (string.endsWith("D")) {
-                return Short.parseShort(string.substring(0, string.length() - 1));
-            } else if (string.endsWith("B")) {
-                return Short.parseShort(string.substring(0, string.length() - 1), 2);
-            } else {
-                try {
-                    return Byte.parseByte(string);
-                } catch (Exception e) {
-                    return switch (string) {
-                        case "AH" -> getAH();
-                        case "AL" -> getAL();
-                        case "BH" -> getBH();
-                        case "BL" -> getBL();
-                        case "CH" -> getCH();
-                        case "CL" -> getCL();
-                        case "DH" -> getDH();
-                        case "DL" -> getDL();
-                        default -> {
-                            BigInteger bigInteger = findValue(string);
-                            if (bigInteger == null) {
-                                throw new RuntimeException("这玩意有问题,你他妈在扯淡");
-                            } else {
-                                yield (short) (bigInteger.intValue() & 0xFF);
-                            }
-                        }
-                    };
-                }
+            BigInteger bigInteger=BigInteger.ZERO;
+            for (int i = 0; i < sizeByte; i++) {
+                bigInteger=bigInteger.add(BigInteger.valueOf(s.getBytes()[i]));
             }
-        }
-    }
-
-    private int stringToWord(String string) {
-        if (string.startsWith("[")) {
-            String s = string.substring(1, string.length() - 1);
-            return getMemWord(stringToMemIndex(s));
-        } else if (string.startsWith("'")) {
-            String s = string.substring(1, string.length() - 1);
-            return s.getBytes()[0] + (s.getBytes()[1] << 8);
+            return bigInteger;
         } else {
             if (string.startsWith("0X")) {
-                return Integer.parseInt(string.substring(2), 16);
+                return new BigInteger(string.substring(2), 16);
             } else if (string.endsWith("H")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1), 16);
+                return new BigInteger(string.substring(0, string.length() - 1), 16);
             } else if (string.endsWith("D")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1));
+                return new BigInteger(string.substring(0, string.length() - 1));
             } else if (string.endsWith("B")) {
-                return Integer.parseInt(string.substring(0, string.length() - 1), 2);
+                return new BigInteger(string.substring(0, string.length() - 1), 2);
             } else {
                 try {
-                    return Integer.parseInt(string);
+                    return new BigInteger(string);
                 } catch (Exception e) {
-                    return switch (string) {
-                        case "AX" -> getAX();
-                        case "BX" -> getBX();
-                        case "CX" -> getCX();
-                        case "DX" -> getDX();
-                        case "SI" -> getSI();
-                        case "DI" -> getDI();
-                        case "SP" -> getSP();
-                        case "BP" -> getBP();
-                        case "CS" -> getCS();
-                        case "DS" -> getDS();
-                        case "ES" -> getES();
-                        case "SS" -> getSS();
-                        default -> {
-                            BigInteger bigInteger = findValue(string);
-                            if (bigInteger == null) {
-                                throw new RuntimeException("这玩意有问题,你他妈在扯淡");
-                            } else {
-                                yield bigInteger.intValue() & 0xFFFF;
+                    if (sizeByte==1){
+                        return switch (string) {
+                            case "AH" -> getAH();
+                            case "AL" -> getAL();
+                            case "BH" -> getBH();
+                            case "BL" -> getBL();
+                            case "CH" -> getCH();
+                            case "CL" -> getCL();
+                            case "DH" -> getDH();
+                            case "DL" -> getDL();
+                            default -> {
+                                BigInteger bigInteger = findValue(string);
+                                if (bigInteger == null) {
+                                    throw new RuntimeException("这玩意有问题,你他妈在扯淡");
+                                } else {
+                                    yield bigInteger.and(new BigInteger("F".repeat(sizeByte*2),16));
+                                }
                             }
-                        }
-                    };
+                        };
+                    }else if (sizeByte==2){
+                        return switch (string) {
+                            case "AX" -> getAX();
+                            case "BX" -> getBX();
+                            case "CX" -> getCX();
+                            case "DX" -> getDX();
+                            case "SI" -> getSI();
+                            case "DI" -> getDI();
+                            case "SP" -> getSP();
+                            case "BP" -> getBP();
+                            case "CS" -> getCS();
+                            case "DS" -> getDS();
+                            case "ES" -> getES();
+                            case "SS" -> getSS();
+                            default -> {
+                                BigInteger bigInteger = findValue(string);
+                                if (bigInteger == null) {
+                                    throw new RuntimeException("这玩意有问题,你他妈在扯淡");
+                                } else {
+                                    yield bigInteger.and(new BigInteger("F".repeat(sizeByte*2),16));
+                                }
+                            }
+                        };
+                    }else {
+                        throw new RuntimeException("这玩意有问题,你他妈在扯淡");
+                    }
                 }
             }
         }
     }
 
 
-    private void setFLAG(BigInteger v, String vString, BigInteger rs, int size) {
+
+    private void setFLAG(BigInteger v, String vString, BigInteger rs, int sizeByte) {
         OF = v.compareTo(rs) != 0;
         ZF = rs.compareTo(BigInteger.ZERO) == 0;
-        if (vString.length() > size) {
-            SF = vString.substring(vString.length() - size).startsWith("1");
-        } else if (vString.length() == size) {
+        if (vString.length() > sizeByte*8) {
+            SF = vString.substring(vString.length() - sizeByte*8).startsWith("1");
+        } else if (vString.length() == sizeByte*8) {
             SF = vString.startsWith("1");
         } else {
             SF = false;
@@ -1066,210 +1064,144 @@ public class Core extends LabelList {
     }
 
 
-    private short addByte(short a, short b) {
-        int v = a + b;
-        short rs = (short) (v & 0xFF);
-        addSetFLAG(a, b, v, rs, 8);
+    private BigInteger add(BigInteger d, BigInteger s,int sizeByte) {
+        BigInteger v = d.add(s);
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
     }
 
-    private int addWord(int a, int b) {
-        int v = a + b;
-        int rs = v & 0xFFFF;
-        addSetFLAG(a, b, v, rs, 16);
+    private BigInteger sub(BigInteger d, BigInteger s,int sizeByte) {
+        BigInteger v = d.add(neg(s));
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        add_subSetFLAG(d, s, v, rs, sizeByte);
         return rs;
     }
 
-    private void addSetFLAG(int a, int b, int v, int rs, int size) {
-        int rsAF = (a & 0xF) + (b & 0xF);
-        AF = Integer.toString(rsAF, 2).length() > 4;
-        String s = Integer.toString(v, 2);
-        CF = s.length() > size;
-        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
+    private void add_subSetFLAG(BigInteger d, BigInteger s, BigInteger v, BigInteger rs, int sizeByte) {
+        BigInteger rsAF = d.and(BigInteger.valueOf(0xF)).add(s.and(BigInteger.valueOf(0xF)));
+        AF = rsAF.toString(2).length() > 4;
+        String string = v.toString(2);
+        CF = string.length() > sizeByte*8;
+        setFLAG(v, string, rs, sizeByte);
     }
 
 
-    private short subByte(short a, short b) {
-        int v = a + negByte(b);
-        short rs = (short) (v & 0xFF);
-        addSetFLAG(a, b, v, rs, 8);
+
+    private BigInteger and(BigInteger d, BigInteger b, int sizeByte) {
+        BigInteger v = d.and(b);
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
-    private int subWord(int a, int b) {
-        int v = a + negWord(b);
-        int rs = v & 0xFFFF;
-        addSetFLAG(a, b, v, rs, 16);
+    private BigInteger or(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.or(s);
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
-
-    private short andByte(short a, short b) {
-        int v = a & b;
-        short rs = (short) (v & 0xFF);
-        and_or_xorSetFLAG(v, rs, 8);
+    private BigInteger xor(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.xor(s);
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        and_or_xorSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
-    private int andWord(int a, int b) {
-        int v = a & b;
-        int rs = v & 0xFFFF;
-        and_or_xorSetFLAG(v, rs, 16);
-        return rs;
-    }
-
-    private short orByte(short a, short b) {
-        int v = a | b;
-        short rs = (short) (v & 0xFF);
-        and_or_xorSetFLAG(v, rs, 8);
-        return rs;
-    }
-
-    private int orWord(int a, int b) {
-        int v = a | b;
-        int rs = v & 0xFFFF;
-        and_or_xorSetFLAG(v, rs, 16);
-        return rs;
-    }
-
-    private short xorByte(short a, short b) {
-        int v = a ^ b;
-        short rs = (short) (v & 0xFF);
-        and_or_xorSetFLAG(v, rs, 8);
-        return rs;
-    }
-
-    private int xorWord(int a, int b) {
-        int v = a ^ b;
-        int rs = v & 0xFFFF;
-        and_or_xorSetFLAG(v, rs, 16);
-        return rs;
-    }
-
-    private void and_or_xorSetFLAG(int v, int rs, int size) {
+    private void and_or_xorSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
         CF = false;
         AF = false;
-        setFLAG(BigInteger.valueOf(v), Integer.toString(v, 2), BigInteger.valueOf(rs), size);
+        setFLAG(v, v.toString(2), rs, sizeByte);
     }
 
 
-    private short shlByte(short a, short b) {
-        int v = a << b;
-        short rs = (short) (v & 0xFF);
-        lSetFLAG(v, rs, 8);
+
+    private BigInteger shl(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.shiftLeft(s.intValue());
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        lSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
-    private int shlWord(int a, int b) {
-        int v = a << b;
-        int rs = v & 0xFFFF;
-        lSetFLAG(v, rs, 16);
+    private BigInteger rol(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.shiftLeft(s.intValue());
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16)).add(v.shiftRight(sizeByte*8 - s.intValue()));
+        lSetFLAG(v, rs, 8);
+        return rs.and(new BigInteger("f".repeat(sizeByte*2),2));
+    }
+
+    private void lSetFLAG(BigInteger v, BigInteger rs, int sizeByte) {
+        String s = v.toString(2);
+        CF = s.length() > sizeByte*8;
+        setFLAG(v, s, rs, sizeByte);
+    }
+
+    private BigInteger shr(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.shiftRight(s.intValue());
+        BigInteger rs = v.and(new BigInteger("f".repeat(sizeByte*2),16));
+        rSetFLAG(v, rs, sizeByte);
         return rs;
     }
 
-    private short rolByte(short a, short b) {
-        int v = a << b;
-        short rs = (byte) (((v & 0xFF) + ((v & 0xFFFFFF00) >>> 8)) & 0xFF);
-        lSetFLAG(v, rs, 8);
-        return (short) (rs & 0xFF);
+    private BigInteger ror(BigInteger d, BigInteger s, int sizeByte) {
+        BigInteger v = d.shiftRight(s.intValue());
+        BigInteger rs = v.add(v.and(new BigInteger("1".repeat(s.intValue()),2).shiftLeft(s.intValue())));
+        rSetFLAG(v, rs, sizeByte);
+        return rs.and(new BigInteger("f".repeat(sizeByte*2),16));
     }
 
-    private int rolWord(int a, int b) {
-        int v = a << b;
-        int rs = (short) (((v & 0xFFFF) + ((v & 0xFFFF0000) >>> 16)) & 0xFFFF);
-        lSetFLAG(v, rs, 8);
-        return rs & 0xFFFF;
-    }
-
-    private void lSetFLAG(int v, int rs, int size) {
-        String s = Integer.toString(v, 2);
+    private void rSetFLAG(BigInteger v, BigInteger rs, int size) {
+        String s = v.toString(2);
         CF = s.length() > size;
-        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
-    }
-
-    private short shrByte(short a, short b) {
-        int v = a >>> b;
-        short rs = (short) (v & 0xFF);
-        rSetFLAG(v, rs, 8);
-        return rs;
-    }
-
-    private int shrWord(int a, int b) {
-        int v = a >>> b;
-        int rs = v & 0xFFFF;
-        rSetFLAG(v, rs, 16);
-        return rs;
-    }
-
-    private short rorByte(short a, short b) {
-        int v = a >>> b;
-        short rs = (byte) (((v & 0xFF) + ((v & 0xFFFFFF00) >>> 8)) & 0xFF);
-        rSetFLAG(v, rs, 8);
-        return (short) (rs & 0xFF);
-    }
-
-    private int rorWord(int a, int b) {
-        int v = a >>> b;
-        int rs = (short) (((v & 0xFFFF) + ((v & 0xFFFF0000) >>> 16)) & 0xFFFF);
-        rSetFLAG(v, rs, 8);
-        return rs & 0xFFFF;
-    }
-
-    private void rSetFLAG(int v, int rs, int size) {
-        String s = Integer.toString(v, 2);
-        CF = s.length() > size;
-        setFLAG(BigInteger.valueOf(v), s, BigInteger.valueOf(rs), size);
+        setFLAG(v, s, rs, size);
     }
 
 
-    private short notByte(short a) {
-        return (short) (~a & 0xFF);
-    }
-
-    private int notWord(int a) {
-        return ~a & 0xFFFF;
-    }
-
-    private short negByte(short a) {
-        return (short) ((notByte(a) + 1) & 0xFF);
-    }
-
-    private int negWord(int a) {
-        return (notWord(a) + 1) & 0xFFFF;
+    private BigInteger not(BigInteger a) {
+        return a.not();
     }
 
 
-    private void mulByte(short a) {
-        int v = getAL() * a;
-        setFLAG(BigInteger.valueOf(v), Integer.toString(v, 2), BigInteger.valueOf(v & 0xff), 16);
+
+    private BigInteger neg(BigInteger a) {
+        return not(a).add(BigInteger.ONE);
+    }
+
+
+    private void mul(BigInteger a, int sizeByte) {
+        BigInteger v;
+        if (sizeByte == 1) {
+            v = getAL().multiply(a);
+        } else if (sizeByte == 2) {
+            v = getAX().multiply(a);
+        }else {
+            return;
+        }
+        setFLAG(v, v.toString(2), v.add(new BigInteger("F".repeat(sizeByte*2))), sizeByte);
         CF = OF;
-        setAX(v);
-    }
-
-    private void mulWord(int a) {
-        long v = ((long) getAX()) * a;
-        setFLAG(BigInteger.valueOf(v), Long.toString(v, 2), BigInteger.valueOf(v & 0xffff), 16);
-        CF = OF;
-        setAX((int) (v & 0xffff));
-        setDX((int) ((v & 0xffff0000L) >>> 16));
+        if (sizeByte == 1) {
+            setAX(v);
+        } else {
+            setAX(v.and(BigInteger.valueOf(0xFFFF)));
+            setDX(v.shiftRight(16));
+        }
     }
 
 
-    private void divByte(short a) {
-        int d = getAX();
-        int v = d / a;
-        int r = d % a;
-        setAL((short) v);
-        setAH((short) r);
-    }
 
-    private void divWord(int a) {
-        long d = getAX();
-        d += (long) getDX() << 16;
-        long v = d / a;
-        long r = d % a;
-        setAX((int) v);
-        setDX((int) r);
+    private void div(BigInteger a, int sizeByte) {
+        if (sizeByte == 1) {
+            BigInteger d = getAX();
+            BigInteger[] v = d.divideAndRemainder(a);
+            setAL(v[0]);
+            setAH(v[1]);
+        }else if (sizeByte == 2) {
+            BigInteger d = getAX().add(getDX().shiftLeft(16));
+            BigInteger[] v = d.divideAndRemainder(a);
+            setAX(v[0]);
+            setDX(v[1]);
+        }
     }
 
 
@@ -1280,6 +1212,7 @@ public class Core extends LabelList {
     private void std() {
         DF = true;
     }
+
 
 
     public static int countCharacter(String str, char targetChar) {
@@ -1293,14 +1226,15 @@ public class Core extends LabelList {
     }
 
 
-    public void pushWord(int s) {
-        setSP((getSP() - 2) & 0xFFFF);
-        setMemWord((getSS() << 4) + getSP(), s);
+
+    public void push(BigInteger s, int sizeByte) {
+        setSP((getSP().subtract(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),2)));
+        setMem((getSS().shiftLeft(4)).add(getSP()).intValue(), s,sizeByte);
     }
 
-    public int popWord() {
-        int s = getMemWord((getSS() << 4) + getSP());
-        setSP((getSP() + 2) & 0xFFFF);
+    public BigInteger pop(int sizeByte) {
+        BigInteger s = getMem(getSS().shiftLeft(4).and(getSP()).intValue(),sizeByte);
+        setSP((getSP().add(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),2)));
         return s;
     }
 

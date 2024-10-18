@@ -73,7 +73,7 @@ public class MainGUI extends JFrame {
                 if (j==0){
                     dataTable[i][j]=Integer.toString(start+i*16,16);
                 }else {
-                    dataTable[i][j]=Integer.toString(core.getMemByte(start+i*16+j-1),16);
+                    dataTable[i][j]=core.getMem(start+i*16+j-1,1).toString(16);
                 }
             }
         }
@@ -84,18 +84,18 @@ public class MainGUI extends JFrame {
     }
     public void refresh(){
         String[] infoData=new String[21];
-        infoData[0]="AX="+Integer.toString(core.getAX(),16);
-        infoData[1]="BX="+Integer.toString(core.getBX(),16);
-        infoData[2]="CX="+Integer.toString(core.getCX(),16);
-        infoData[3]="DX="+Integer.toString(core.getDX(),16);
-        infoData[4]="SI="+Integer.toString(core.getSI(),16);
-        infoData[5]="DI="+Integer.toString(core.getDI(),16);
-        infoData[6]="BP="+Integer.toString(core.getBP(),16);
-        infoData[7]="SP="+Integer.toString(core.getSP(),16);
-        infoData[8]="CS="+Integer.toString(core.getCS(),16);
-        infoData[9]="DS="+Integer.toString(core.getDS(),16);
-        infoData[10]="ES="+Integer.toString(core.getES(),16);
-        infoData[11]="SS="+Integer.toString(core.getSS(),16);
+        infoData[0]="AX="+Integer.toString(core.getAX().intValue(),16);
+        infoData[1]="BX="+Integer.toString(core.getBX().intValue(),16);
+        infoData[2]="CX="+Integer.toString(core.getCX().intValue(),16);
+        infoData[3]="DX="+Integer.toString(core.getDX().intValue(),16);
+        infoData[4]="SI="+Integer.toString(core.getSI().intValue(),16);
+        infoData[5]="DI="+Integer.toString(core.getDI().intValue(),16);
+        infoData[6]="BP="+Integer.toString(core.getBP().intValue(),16);
+        infoData[7]="SP="+Integer.toString(core.getSP().intValue(),16);
+        infoData[8]="CS="+Integer.toString(core.getCS().intValue(),16);
+        infoData[9]="DS="+Integer.toString(core.getDS().intValue(),16);
+        infoData[10]="ES="+Integer.toString(core.getES().intValue(),16);
+        infoData[11]="SS="+Integer.toString(core.getSS().intValue(),16);
         infoData[12]="CF="+core.isCF();
         infoData[13]="PF="+core.isPF();
         infoData[14]="AF="+core.isAF();
@@ -119,7 +119,7 @@ public class MainGUI extends JFrame {
                 if (j==0){
                     dataTable[i][j]=Integer.toString(start+i*16,16);
                 }else {
-                    dataTable[i][j]=Integer.toString(core.getMemByte(start+i*16+j-1),16);
+                    dataTable[i][j]=core.getMem(start+i*16+j-1,1).toString(16);
                 }
             }
         }
