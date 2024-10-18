@@ -1196,7 +1196,7 @@ public class Core extends LabelList {
         }else {
             return;
         }
-        setFLAG(v, v.toString(2), v.add(new BigInteger("F".repeat(sizeByte*2))), sizeByte);
+        setFLAG(v, v.toString(2), v.and(new BigInteger("F".repeat(sizeByte*2),16)), sizeByte);
         CF = OF;
         if (sizeByte == 1) {
             setAX(v);
@@ -1246,13 +1246,13 @@ public class Core extends LabelList {
 
 
     public void push(BigInteger s, int sizeByte) {
-        setSP((getSP().subtract(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),2)));
+        setSP((getSP().subtract(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),16)));
         setMem((getSS().shiftLeft(4)).add(getSP()).intValue(), s,sizeByte);
     }
 
     public BigInteger pop(int sizeByte) {
         BigInteger s = getMem(getSS().shiftLeft(4).and(getSP()).intValue(),sizeByte);
-        setSP((getSP().add(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),2)));
+        setSP((getSP().add(BigInteger.valueOf(2))).and(new BigInteger("F".repeat(sizeByte*2),16)));
         return s;
     }
 
