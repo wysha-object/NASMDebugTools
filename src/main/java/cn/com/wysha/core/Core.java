@@ -1119,8 +1119,6 @@ public class Core extends LabelList {
         } else {
             if (string.startsWith("0X")) {
                 return new BigInteger(string.substring(2), 16);
-            } else if (string.endsWith("H")) {
-                return new BigInteger(string.substring(0, string.length() - 1), 16);
             } else if (string.endsWith("D")) {
                 return new BigInteger(string.substring(0, string.length() - 1));
             } else if (string.endsWith("B")) {
